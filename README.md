@@ -6,12 +6,16 @@ An AI-powered automated attendance solution that detects and recognizes students
 - **Multi-Face Recognition**: Detects and recognizes multiple students in a single classroom image.
 - **High Accuracy AI**: Uses RetinaFace for robust face detection and ArcFace (InsightFace) for high-precision embeddings.
 - **Production-Grade Backend**: Built with FastAPI, SQLAlchemy (Async), and PostgreSQL.
+- **Automatic Attendance Engine**: Converts AI recognition results into persistent attendance records with duplicate prevention.
+- **Modern Admin Dashboard**: Fully responsive React frontend with Light/Dark mode, student management, and real-time attendance marking.
+- **Attendance Analytics**: Visual trends and presence distribution charts.
 - **Automatic Cleanup**: Comprehensive student deletion pipeline that removes metadata, embeddings, and images.
 - **Debug Visualization**: Generates annotated images with bounding boxes and confidence scores for AI verification.
 - **Dockerized Deployment**: Easy setup with Docker Compose for consistent environments.
 
 ## 🛠️ Tech Stack
 - **Backend**: FastAPI, Python 3.11
+- **Frontend**: React 18, Vite, Tailwind CSS, Zustand, TanStack Query
 - **Database**: PostgreSQL, SQLAlchemy 2.0, Alembic
 - **AI/ML**: InsightFace (RetinaFace & ArcFace), OpenCV, NumPy, ONNX Runtime
 - **Infrastructure**: Docker, Docker Compose
@@ -22,6 +26,7 @@ An AI-powered automated attendance solution that detects and recognizes students
 ### Prerequisites
 - Docker Desktop installed
 - Git cloned to local machine
+- Node.js and npm installed (for frontend)
 
 ### Installation & Setup
 1. **Clone the repository**:
@@ -38,7 +43,7 @@ An AI-powered automated attendance solution that detects and recognizes students
    SECRET_KEY=your-secret-key
    ```
 
-3. **Launch with Docker**:
+3. **Launch Backend with Docker**:
    ```bash
    docker-compose up -d --build
    ```
@@ -48,12 +53,19 @@ An AI-powered automated attendance solution that detects and recognizes students
    docker-compose exec backend alembic upgrade head
    ```
 
-### API Documentation
-Once the system is running, access the interactive Swagger documentation at:
-`http://localhost:8000/docs`
+5. **Launch Frontend**:
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
+
+### 🖥️ Accessing the System
+- **Admin Dashboard**: `http://localhost:5173`
+- **API Documentation**: `http://localhost:8000/docs`
 
 ### 🧪 Testing the System
-You can use **Postman** or **Curl** to test the following endpoints:
+You can use the Dashboard or the following API endpoints:
 
 | Action | Method | Endpoint | Description |
 | :--- | :--- | :--- | :--- |
@@ -62,6 +74,9 @@ You can use **Postman** or **Curl** to test the following endpoints:
 | **Upload Photos** | `POST` | `/students/{id}/upload-images` | Upload reference images |
 | **Generate AI** | `POST` | `/ai/students/{id}/generate-embeddings` | Create facial embeddings |
 | **Recognize Class** | `POST` | `/recognition/classroom` | Detect & recognize multiple students |
+| **Mark Attendance** | `POST` | `/attendance/mark` | Recognize and mark attendance |
+| **Get Report** | `GET` | `/attendance/report` | Get daily attendance status |
+| **Export CSV** | `GET` | `/attendance/export/csv` | Download attendance as CSV |
 
 **Visualizing Results:**
 - **Student Images**: `http://localhost:8000/static/students/{roll_number}/{filename}`
@@ -77,6 +92,13 @@ app/
 ├── schemas/      # Pydantic validation models
 ├── core/         # Global configuration and security
 └── main.py       # Application entry point
+
+frontend/
+├── src/
+│   ├── api/      # API service layer
+│   ├── components/ # Reusable UI components
+│   ├── pages/      # Page-level views
+│   └── store/      # Global state (Theme, etc.)
 ```
 
 ## 📈 Roadmap
@@ -84,5 +106,5 @@ app/
 - [x] Phase 2: Student Registration & Image Uploads
 - [x] Phase 3: AI Embedding Generation
 - [x] Phase 4: Multi-Face Classroom Recognition
-- [ ] Phase 5: Attendance Marking Engine
-- [ ] Phase 6: Admin Dashboard & Analytics Reports
+- [x] Phase 5: Attendance Marking Engine
+- [x] Phase 6: Admin Dashboard & Analytics Reports

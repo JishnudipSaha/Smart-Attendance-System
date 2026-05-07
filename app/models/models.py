@@ -31,9 +31,11 @@ class Attendance(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     student_id = Column(Integer, ForeignKey("students.id"), nullable=False)
+    class_name = Column(String, nullable=False)
     attendance_date = Column(DateTime(timezone=True), nullable=False)
     attendance_time = Column(DateTime(timezone=True), nullable=False)
     status = Column(String, nullable=False) # e.g., "Present", "Absent"
+    confidence_score = Column(Float, nullable=True)
 
     student = relationship("Student", back_populates="attendance")
 
