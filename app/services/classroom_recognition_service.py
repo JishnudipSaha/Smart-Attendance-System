@@ -30,13 +30,26 @@ class ClassroomRecognitionService:
         temp_filename = f"classroom_{uuid.uuid4().hex}.jpg"
         temp_path = Path(f"static/debug/{temp_filename}")
 
+        file_bytes = await image_file.read()
+        if not file_bytes:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Uploaded image is empty or unreadable."
+            )
+
         with temp_path.open("wb") as buffer:
-            shutil.copyfileobj(image_file.file, buffer)
+            buffer.write(file_bytes)
 
         try:
             # 2. Detect and extract all embeddings from the image
             # returns List[Tuple[bbox, embedding]]
-            face_data = self.pipeline.process_classroom_image(str(temp_path))
+            try:
+                face_data = self.pipeline.process_classroom_image(str(temp_path))
+            except FileNotFoundError:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="Invalid image content. Please upload a valid JPEG or PNG image."
+                )
 
             if not face_data:
                 return {"recognized_students": [], "debug_image": None}
@@ -111,5 +124,3 @@ class ClassroomRecognitionService:
         finally:
             # Cleanup temporary image if needed, or keep in debug
             pass
-
-import shutil # Added missing import for shutil

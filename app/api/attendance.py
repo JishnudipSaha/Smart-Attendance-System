@@ -1,10 +1,9 @@
-from fastapi import APIRouter, Depends, UploadFile, File, Form, Query, HTTPException
+from fastapi import APIRouter, Depends, UploadFile, File, Form, Query
 from fastapi.responses import StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import date
 import csv
 import io
-from typing import List, Optional
 
 from app.db.session import get_db
 from app.services.attendance_service import AttendanceService
@@ -22,50 +21,33 @@ async def mark_attendance(
     """
     Recognizes students from a classroom image and marks their attendance.
     """
-    # 1. Save uploaded image temporarily for AI processing
-    # The recognition service expects a path or bytes.
-    # Since ClassroomRecognitionService.recognize_classroom takes an image path, we save it.
-    import os
-    from app.core.config import settings
-    from pathlib import Path
-
-    debug_dir = Path(settings.DEBUG_DIR)
-    debug_dir.mkdir(parents=True, exist_ok=True)
-
-    temp_filename = f"attn_{class_name}_{int(date.today().timestamp())}.jpg"
-    temp_path = debug_dir / temp_filename
-
-    with open(temp_path, "wb") as buffer:
-        buffer.write(await image.read())
-
-    # 2. Run recognition pipeline
+    # 1. Run recognition pipeline directly from uploaded file
     recognition_service = ClassroomRecognitionService(db)
-    results = await recognition_service.recognize_classroom(str(temp_path))
+    results = await recognition_service.recognize_classroom(image)
+    recognized_students = results.get("recognized_students", [])
 
-    # 3. Mark attendance for recognized students
+    # 2. Mark attendance for recognized students
     similarity_service = SimilarityService()
     attendance_service = AttendanceService(db)
 
     marked_present = []
-    for face in results:
+    for face in recognized_students:
         # Only mark if confidence is above threshold
-        if face.confidence >= similarity_service.threshold:
-            student_id = face.student_id
-            # We need the student name for the response
-            # We'll fetch it from the result if available or query DB
-            # Since face object usually contains student_id, let's just use a helper
+        confidence = float(face.get("confidence", 0))
+        student_id = face.get("student_id")
+        if student_id is None:
+            continue
 
-            record = await attendance_service.mark_attendance(
+        if confidence >= similarity_service.threshold:
+            await attendance_service.mark_attendance(
                 student_id=student_id,
                 class_name=class_name,
-                confidence=face.confidence
+                confidence=confidence
             )
 
-            # To get the name, we'd ideally have it in the face object.
-            # For now, we'll return the ID and confidence.
             marked_present.append({
                 "student_id": student_id,
-                "confidence": face.confidence
+                "confidence": confidence
             })
 
     return {
@@ -75,7 +57,7 @@ async def mark_attendance(
         },
         "marked_present": marked_present,
         "total_count": len(marked_present),
-        "debug_image_url": f"/static/debug/{temp_filename}"
+        "debug_image_url": results.get("debug_image_url")
     }
 
 @router.get("/report")

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import DashboardLayout from '../components/layout/DashboardLayout';
-import StudentsPage from './Students/StudentsPage';
-import MarkAttendancePage from './MarkAttendance/MarkAttendancePage';
-import ReportsPage from './Reports/ReportsPage';
-import AnalyticsPage from './Analytics/AnalyticsPage';
+import DashboardLayout from './components/layout/DashboardLayout';
+import StudentsPage from './pages/Students/StudentsPage';
+import MarkAttendancePage from './pages/MarkAttendance/MarkAttendancePage';
+import ReportsPage from './pages/Reports/ReportsPage';
+import AnalyticsPage from './pages/Analytics/AnalyticsPage';
 
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState('dashboard');

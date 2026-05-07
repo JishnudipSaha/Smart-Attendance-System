@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import apiClient from '../../api/client';
 
+interface AnalyticsEntry {
+  date: string;
+  present: number;
+}
+
 const AnalyticsPage: React.FC = () => {
-  const [data, setData] = useState<<any[]>([]);
+  const [data, setData] = useState<AnalyticsEntry[]>([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetchAnalytics();
-  }, []);
+  const pieData = [
+    { name: 'Present', value: 75 },
+    { name: 'Absent', value: 25 },
+  ];
+  const COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b'];
 
-  const fetchAnalytics = async () => {
+  const fetchAnalytics = useCallback(async () => {
     setLoading(true);
     try {
       // In a real scenario, we'd have a specialized /analytics endpoint.
@@ -21,12 +28,11 @@ const AnalyticsPage: React.FC = () => {
         date.setDate(date.getDate() - i);
         const dateStr = date.toISOString().split('T')[0];
 
-        const resp = await apiClient.get('/attendance/report', {
+        await apiClient.get('/attendance/report', {
           params: { class_name: 'CS101', report_date: dateStr },
         });
         reports.push({
           date: dateStr,
-          count: reports.length, // dummy for now
           present: reports.length, // dummy for now
         });
       }
@@ -36,9 +42,12 @@ const AnalyticsPage: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b'];
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchAnalytics();
+  }, [fetchAnalytics]);
 
   return (
     <div className="space-y-8">
@@ -66,8 +75,8 @@ const AnalyticsPage: React.FC = () => {
                   <Bar dataKey="present" fill="#3b82f6" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         {/* Distribution Chart */}
@@ -80,24 +89,21 @@ const AnalyticsPage: React.FC = () => {
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
-                    data={[
-                      { name: 'Present', value: 75 },
-                      { name: 'Absent', value: 25 },
-                    ]}
+                    data={pieData}
                     cx="50%" cy="50%"
                     innerRadius={60}
                     outerRadius={80}
                     paddingAngle={5}
                     dataKey="value"
                   >
-                    {data.map((entry, index) => (
+                    {pieData.map((_, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
                   <Tooltip />
                 </PieChart>
               </ResponsiveContainer>
-            </div>
+            )}
           </div>
         </div>
       </div>

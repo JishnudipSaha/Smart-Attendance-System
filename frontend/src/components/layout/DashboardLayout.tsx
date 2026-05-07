@@ -1,6 +1,6 @@
 import React from 'react';
 import { Home, Users, Camera, FileText, BarChart3 } from 'lucide-react';
-import { ThemeToggle } from '../common/ThemeToggle';
+import ThemeToggle from '../common/ThemeToggle';
 
 interface SidebarItemProps {
   icon: React.ReactNode;

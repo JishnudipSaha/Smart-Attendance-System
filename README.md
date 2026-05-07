@@ -59,6 +59,7 @@ An AI-powered automated attendance solution that detects and recognizes students
    npm install
    npm run dev
    ```
+   > If you are in the project root, run: `npm --prefix ./frontend run dev`
 
 ### 🖥️ Accessing the System
 - **Admin Dashboard**: `http://localhost:5173`
@@ -81,6 +82,13 @@ You can use the Dashboard or the following API endpoints:
 **Visualizing Results:**
 - **Student Images**: `http://localhost:8000/static/students/{roll_number}/{filename}`
 - **AI Debug Images**: `http://localhost:8000/static/debug/{debug_filename}`
+
+## ✅ Recent Updates
+- Fixed frontend lint/type issues across Students, Mark Attendance, Reports, and Analytics pages.
+- Fixed Tailwind CSS v4 setup so UI styling renders correctly in the web app.
+- Added real student image upload flow in the Students page (replacing placeholder popup).
+- Fixed `/attendance/mark` to use the same recognition path as `/recognition/classroom`.
+- Improved attendance recognition error handling for invalid or unreadable image uploads.
 
 ## 📁 Project Architecture
 ```text

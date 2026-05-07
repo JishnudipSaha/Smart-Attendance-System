@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Plus, Upload, Zap, Trash2 } from 'lucide-react';
-import { studentService } from '../../api/client';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Loader2, Plus, Upload, Zap } from 'lucide-react';
+import { studentService, type Student, type StudentCreateInput } from '../../api/client';
 
 const StudentsPage: React.FC = () => {
-  const [students, setStudents] = useState<any[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newStudent, setNewStudent] = useState({ name: '', roll_number: '', class_name: '', section: '' });
+  const [newStudent, setNewStudent] = useState<StudentCreateInput>({
+    name: '',
+    roll_number: '',
+    class_name: '',
+    section: '',
+  });
   const [loading, setLoading] = useState(false);
+  const [uploadingStudentId, setUploadingStudentId] = useState<number | null>(null);
+  const fileInputRefs = useRef<Record<number, HTMLInputElement | null>>({});
 
-  useEffect(() => {
-    fetchStudents();
-  }, []);
-
-  const fetchStudents = async () => {
+  const fetchStudents = useCallback(async () => {
     setLoading(true);
     try {
       const data = await studentService.getAll();
@@ -22,7 +25,12 @@ const StudentsPage: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchStudents();
+  }, [fetchStudents]);
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,8 +39,27 @@ const StudentsPage: React.FC = () => {
       setNewStudent({ name: '', roll_number: '', class_name: '', section: '' });
       setIsModalOpen(false);
       fetchStudents();
-    } catch (error) {
+    } catch {
       alert('Error creating student');
+    }
+  };
+
+  const handleUploadImages = async (
+    studentId: number,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const files = e.target.files ? Array.from(e.target.files) : [];
+    if (files.length === 0) return;
+
+    setUploadingStudentId(studentId);
+    try {
+      await studentService.uploadImages(studentId, files);
+      alert('Images uploaded successfully!');
+    } catch {
+      alert('Error uploading images');
+    } finally {
+      setUploadingStudentId(null);
+      e.target.value = '';
     }
   };
 
@@ -65,12 +92,27 @@ const StudentsPage: React.FC = () => {
                   <p className="text-sm text-slate-500 dark:text-slate-400">{student.roll_number} • {student.class_name} {student.section}</p>
                 </div>
                 <div className="flex gap-2">
+                  <input
+                    ref={(el) => {
+                      fileInputRefs.current[student.id] = el;
+                    }}
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    className="hidden"
+                    onChange={(e) => handleUploadImages(student.id, e)}
+                  />
                   <button
-                    onClick={() => alert('Image upload coming soon!')}
+                    onClick={() => fileInputRefs.current[student.id]?.click()}
+                    disabled={uploadingStudentId === student.id}
                     className="p-2 text-slate-500 hover:text-primary-600 transition-colors"
                     title="Upload Images"
                   >
-                    <Upload size={18} />
+                    {uploadingStudentId === student.id ? (
+                      <Loader2 size={18} className="animate-spin" />
+                    ) : (
+                      <Upload size={18} />
+                    )}
                   </button>
                   <button
                     onClick={() => studentService.generateEmbeddings(student.id).then(() => alert('Embeddings generated!')).catch(() => alert('Error generating embeddings'))}

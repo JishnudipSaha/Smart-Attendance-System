@@ -2,6 +2,21 @@ import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:8000';
 
+export interface Student {
+  id: number;
+  name: string;
+  roll_number: string;
+  class_name: string;
+  section: string;
+}
+
+export interface StudentCreateInput {
+  name: string;
+  roll_number: string;
+  class_name: string;
+  section: string;
+}
+
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -11,11 +26,11 @@ const apiClient = axios.create({
 
 export const studentService = {
   async getAll() {
-    const response = await apiClient.get('/students/');
+    const response = await apiClient.get<Student[]>('/students/');
     return response.data;
   },
-  async create(data: any) {
-    const response = await apiClient.post('/students/', data);
+  async create(data: StudentCreateInput) {
+    const response = await apiClient.post<Student>('/students/', data);
     return response.data;
   },
   async uploadImages(studentId: number, files: File[]) {

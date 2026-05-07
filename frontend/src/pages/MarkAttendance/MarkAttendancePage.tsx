@@ -7,16 +7,23 @@ interface RecognitionResult {
   confidence: number;
 }
 
+interface AttendanceSession {
+  class_name: string;
+  date: string;
+}
+
+interface AttendanceMarkResponse {
+  session: AttendanceSession;
+  marked_present: RecognitionResult[];
+  total_count: number;
+  debug_image_url: string;
+}
+
 const MarkAttendancePage: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [className, setClassName] = useState('');
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<{
-    session: { class_name: string; date: string };
-    marked_present: RecognitionResult[];
-    total_count: number;
-    debug_image_url: string;
-  } | null>(null);
+  const [results, setResults] = useState<AttendanceMarkResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +31,16 @@ const MarkAttendancePage: React.FC = () => {
       setFile(e.target.files[0]);
       setError(null);
     }
+  };
+
+  const getErrorMessage = (err: unknown): string => {
+    if (typeof err === 'object' && err !== null && 'response' in err) {
+      const response = (err as { response?: { data?: { detail?: string } } }).response;
+      if (response?.data?.detail) {
+        return response.data.detail;
+      }
+    }
+    return 'An error occurred while marking attendance.';
   };
 
   const handleMarkAttendance = async (e: React.FormEvent) => {
@@ -42,12 +59,12 @@ const MarkAttendancePage: React.FC = () => {
     formData.append('image', file);
 
     try {
-      const response = await apiClient.post('/attendance/mark', formData, {
+      const response = await apiClient.post<AttendanceMarkResponse>('/attendance/mark', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       setResults(response.data);
-    } catch (err: any) {
-      setError(err.response?.data?.detail || 'An error occurred while marking attendance.');
+    } catch (err: unknown) {
+      setError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
