@@ -52,6 +52,21 @@ An AI-powered automated attendance solution that detects and recognizes students
 Once the system is running, access the interactive Swagger documentation at:
 `http://localhost:8000/docs`
 
+### 🧪 Testing the System
+You can use **Postman** or **Curl** to test the following endpoints:
+
+| Action | Method | Endpoint | Description |
+| :--- | :--- | :--- | :--- |
+| **Health Check** | `GET` | `/health` | Verify API and DB connectivity |
+| **Register Student** | `POST` | `/students/` | Create student metadata |
+| **Upload Photos** | `POST` | `/students/{id}/upload-images` | Upload reference images |
+| **Generate AI** | `POST` | `/ai/students/{id}/generate-embeddings` | Create facial embeddings |
+| **Recognize Class** | `POST` | `/recognition/classroom` | Detect & recognize multiple students |
+
+**Visualizing Results:**
+- **Student Images**: `http://localhost:8000/static/students/{roll_number}/{filename}`
+- **AI Debug Images**: `http://localhost:8000/static/debug/{debug_filename}`
+
 ## 📁 Project Architecture
 ```text
 app/
