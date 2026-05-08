@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Calendar, Download, User } from 'lucide-react';
-import apiClient from '../../api/client';
+import apiClient, { studentService } from '../../api/client';
 
 interface ReportEntry {
   student_id: number;
@@ -16,23 +16,47 @@ interface AttendanceReportResponse {
 }
 
 const ReportsPage: React.FC = () => {
-  const [className, setClassName] = useState('CS101');
+  const [className, setClassName] = useState('');
+  const [availableClasses, setAvailableClasses] = useState<string[]>([]);
   const [reportDate, setReportDate] = useState(new Date().toISOString().split('T')[0]);
   const [report, setReport] = useState<ReportEntry[]>([]);
   const [loading, setLoading] = useState(false);
+  const [loadingClasses, setLoadingClasses] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const getErrorMessage = (err: unknown): string => {
+  const getErrorMessage = (err: unknown, fallback: string): string => {
     if (typeof err === 'object' && err !== null && 'response' in err) {
       const response = (err as { response?: { data?: { detail?: string } } }).response;
       if (response?.data?.detail) {
         return response.data.detail;
       }
     }
-    return 'Failed to fetch attendance report.';
+    return fallback;
   };
 
+  const fetchAvailableClasses = useCallback(async () => {
+    setLoadingClasses(true);
+    try {
+      const students = await studentService.getAll();
+      const uniqueClasses = [...new Set(students.map((student) => student.class_name))]
+        .filter((name) => name.trim().length > 0)
+        .sort((a, b) => a.localeCompare(b));
+
+      setAvailableClasses(uniqueClasses);
+      setClassName((prev) => (prev && uniqueClasses.includes(prev) ? prev : (uniqueClasses[0] ?? '')));
+    } catch (err: unknown) {
+      setError(getErrorMessage(err, 'Failed to load registered classes.'));
+    } finally {
+      setLoadingClasses(false);
+    }
+  }, []);
+
   const fetchReport = useCallback(async () => {
+    if (!className) {
+      setReport([]);
+      return;
+    }
+
     setLoading(true);
     setError(null);
     try {
@@ -41,11 +65,16 @@ const ReportsPage: React.FC = () => {
       });
       setReport(response.data.report);
     } catch (err: unknown) {
-      setError(getErrorMessage(err));
+      setError(getErrorMessage(err, 'Failed to fetch attendance report.'));
     } finally {
       setLoading(false);
     }
   }, [className, reportDate]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchAvailableClasses();
+  }, [fetchAvailableClasses]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -65,7 +94,8 @@ const ReportsPage: React.FC = () => {
         </div>
         <button
           onClick={handleExport}
-          className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-sm font-medium"
+          disabled={!className}
+          className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <Download size={18} /> Export CSV
         </button>
@@ -76,12 +106,22 @@ const ReportsPage: React.FC = () => {
           <label className="text-sm font-medium flex items-center gap-2">
             <User size={16} /> Class Name
           </label>
-          <input
-            type="text"
-            className="w-full p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent outline-none focus:ring-2 ring-primary-500"
+          <select
+            className="w-full p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-slate-900 dark:text-slate-100 outline-none focus:ring-2 ring-primary-500 [&_option]:text-slate-900 [&_option]:bg-white"
             value={className}
             onChange={(e) => setClassName(e.target.value)}
-          />
+            disabled={loadingClasses || availableClasses.length === 0}
+          >
+            {availableClasses.length === 0 ? (
+              <option value="">{loadingClasses ? 'Loading classes...' : 'No classes available'}</option>
+            ) : (
+              availableClasses.map((registeredClass) => (
+                <option key={registeredClass} value={registeredClass}>
+                  {registeredClass}
+                </option>
+              ))
+            )}
+          </select>
         </div>
         <div className="space-y-2">
           <label className="text-sm font-medium flex items-center gap-2">
@@ -97,12 +137,19 @@ const ReportsPage: React.FC = () => {
         <div className="flex items-end">
           <button
             onClick={fetchReport}
-            className="w-full py-2 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition-colors"
+            disabled={!className || loadingClasses}
+            className="w-full py-2 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Refresh Report
           </button>
         </div>
       </div>
+
+      {!loadingClasses && availableClasses.length === 0 && (
+        <div className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg text-amber-700 dark:text-amber-300 text-sm">
+          No registered classes found. Add students first to load class options.
+        </div>
+      )}
 
       {error && (
         <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400 text-sm">

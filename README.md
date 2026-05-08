@@ -89,6 +89,11 @@ You can use the Dashboard or the following API endpoints:
 - Added real student image upload flow in the Students page (replacing placeholder popup).
 - Fixed `/attendance/mark` to use the same recognition path as `/recognition/classroom`.
 - Improved attendance recognition error handling for invalid or unreadable image uploads.
+- Added frontend student deletion with confirmation and backend cascade cleanup support.
+- Added per-student status tracking in UI: uploaded photo count, embedding count, and generated/pending badges.
+- Added student ID visibility in student cards and delete confirmation for safer operations.
+- Added class-name dropdown in Attendance Reports populated from registered classes.
+- Fixed dropdown option contrast/readability in dark mode.
 
 ## 📁 Project Architecture
 ```text

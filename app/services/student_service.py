@@ -1,6 +1,5 @@
 import os
 import shutil
-import time
 import uuid
 from typing import List, Optional
 from pathlib import Path
@@ -8,8 +7,9 @@ from fastapi import UploadFile, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import func
 
-from app.models.models import Student
+from app.models.models import Student, Embedding
 from app.schemas.student import StudentCreate, StudentResponse, StudentImageResponse
 from app.core.config import settings
 
@@ -17,6 +17,40 @@ class StudentService:
     def __init__(self, db: AsyncSession):
         self.db = db
         self.upload_dir = Path(settings.UPLOAD_DIR)
+
+    def _count_uploaded_images(self, roll_number: str) -> int:
+        student_folder = self.upload_dir / roll_number
+        if not student_folder.exists() or not student_folder.is_dir():
+            return 0
+
+        valid_extensions = {".jpg", ".jpeg", ".png"}
+        return sum(
+            1
+            for path in student_folder.iterdir()
+            if path.is_file() and path.suffix.lower() in valid_extensions
+        )
+
+    async def _count_embeddings(self, student_id: int) -> int:
+        query = select(func.count(Embedding.id)).where(Embedding.student_id == student_id)
+        result = await self.db.execute(query)
+        return int(result.scalar_one() or 0)
+
+    async def _build_student_response(self, student: Student) -> StudentResponse:
+        uploaded_images_count = self._count_uploaded_images(student.roll_number)
+        embeddings_count = await self._count_embeddings(student.id)
+
+        return StudentResponse(
+            id=student.id,
+            name=student.name,
+            roll_number=student.roll_number,
+            class_name=student.class_name,
+            section=student.section,
+            created_at=student.created_at,
+            uploaded_images_count=uploaded_images_count,
+            embeddings_count=embeddings_count,
+            has_uploaded_images=uploaded_images_count > 0,
+            has_embeddings=embeddings_count > 0,
+        )
 
     async def create_student(self, student_data: StudentCreate) -> StudentResponse:
         # Check for duplicate roll number
@@ -40,15 +74,22 @@ class StudentService:
                 detail="Database integrity error occurred during student creation"
             )
 
-        return StudentResponse.model_validate(new_student)
+        return await self._build_student_response(new_student)
 
     async def get_student(self, student_id: int) -> Optional[Student]:
         result = await self.db.execute(select(Student).where(Student.id == student_id))
         return result.scalar_one_or_none()
 
-    async def list_students(self) -> List[Student]:
+    async def list_students(self) -> List[StudentResponse]:
         result = await self.db.execute(select(Student).order_by(Student.id))
-        return result.scalars().all()
+        students = result.scalars().all()
+        return [await self._build_student_response(student) for student in students]
+
+    async def get_student_response(self, student_id: int) -> Optional[StudentResponse]:
+        student = await self.get_student(student_id)
+        if not student:
+            return None
+        return await self._build_student_response(student)
 
     async def upload_student_images(self, student_id: int, files: List[UploadFile]) -> List[StudentImageResponse]:
         # 1. Verify student exists

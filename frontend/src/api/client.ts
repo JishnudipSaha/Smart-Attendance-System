@@ -8,6 +8,10 @@ export interface Student {
   roll_number: string;
   class_name: string;
   section: string;
+  uploaded_images_count: number;
+  embeddings_count: number;
+  has_uploaded_images: boolean;
+  has_embeddings: boolean;
 }
 
 export interface StudentCreateInput {
@@ -44,6 +48,9 @@ export const studentService = {
   async generateEmbeddings(studentId: number) {
     const response = await apiClient.post(`/ai/students/${studentId}/generate-embeddings`);
     return response.data;
+  },
+  async delete(studentId: number) {
+    await apiClient.delete(`/students/${studentId}`);
   },
 };
 

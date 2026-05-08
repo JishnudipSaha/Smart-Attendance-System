@@ -20,6 +20,10 @@ class StudentUpdate(BaseModel):
 class StudentResponse(StudentBase):
     id: int
     created_at: datetime
+    uploaded_images_count: int = 0
+    embeddings_count: int = 0
+    has_uploaded_images: bool = False
+    has_embeddings: bool = False
 
     model_config = ConfigDict(from_attributes=True)
 

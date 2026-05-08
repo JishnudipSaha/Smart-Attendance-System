@@ -28,7 +28,7 @@ async def list_students(db: AsyncSession = Depends(get_db)):
 async def get_student(student_id: int, db: AsyncSession = Depends(get_db)):
     """Retrieve detailed metadata for a specific student."""
     service = StudentService(db)
-    student = await service.get_student(student_id)
+    student = await service.get_student_response(student_id)
     if not student:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Student not found")
     return student
