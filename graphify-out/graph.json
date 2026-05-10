@@ -1,0 +1,4737 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "hg_attendance_flow",
+        "label": "Attendance Recognition Flow",
+        "nodes": [
+          "attendance_router",
+          "ClassroomRecognitionService",
+          "RecognitionPipeline",
+          "FaceDetector",
+          "FaceRecognizer",
+          "SimilarityService",
+          "AttendanceService",
+          "Student",
+          "Embedding"
+        ],
+        "description": "Complete flow for classroom image processing and attendance marking"
+      },
+      {
+        "id": "hg_ai_service",
+        "label": "AI/ML Service Layer",
+        "nodes": [
+          "AIService",
+          "RecognitionPipeline",
+          "FaceDetector",
+          "FaceRecognizer",
+          "SimilarityService",
+          "InsightFace"
+        ],
+        "description": "Coordinated AI and face recognition services"
+      },
+      {
+        "id": "hg_student_management",
+        "label": "Student Data Management",
+        "nodes": [
+          "StudentService",
+          "Student",
+          "Embedding",
+          "Attendance"
+        ],
+        "description": "Student registration, profile, and data lifecycle management"
+      },
+      {
+        "id": "auth_flow",
+        "label": "Student Authentication Workflow",
+        "nodes": [
+          "students_page",
+          "api_client",
+          "student_interface",
+          "backend_system"
+        ]
+      },
+      {
+        "id": "recognition_flow",
+        "label": "Face Recognition Pipeline",
+        "nodes": [
+          "mark_attendance_page",
+          "face_recognition",
+          "insightface",
+          "embedding_generation",
+          "backend_system"
+        ]
+      },
+      {
+        "id": "reporting_flow",
+        "label": "Attendance Reporting Workflow",
+        "nodes": [
+          "reports_page",
+          "analytics_page",
+          "attendance_report",
+          "api_client",
+          "backend_system"
+        ]
+      },
+      {
+        "id": "theme_management",
+        "label": "Theme Management System",
+        "nodes": [
+          "theme_toggle",
+          "theme_store",
+          "dark_mode_theme",
+          "light_mode_theme",
+          "tailwind"
+        ]
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "label": "test_api.py",
+      "file_type": "code",
+      "source_file": "test_api.py",
+      "source_location": "L1",
+      "id": "test_api_py"
+    },
+    {
+      "label": "test()",
+      "file_type": "code",
+      "source_file": "test_api.py",
+      "source_location": "L4",
+      "id": "smart_attendance_system_test_api_test"
+    },
+    {
+      "label": "env.py",
+      "file_type": "code",
+      "source_file": "alembic/env.py",
+      "source_location": "L1",
+      "id": "alembic_env_py"
+    },
+    {
+      "label": "run_migrations_offline()",
+      "file_type": "code",
+      "source_file": "alembic/env.py",
+      "source_location": "L32",
+      "id": "alembic_env_run_migrations_offline"
+    },
+    {
+      "label": "run_migrations_online()",
+      "file_type": "code",
+      "source_file": "alembic/env.py",
+      "source_location": "L45",
+      "id": "alembic_env_run_migrations_online"
+    },
+    {
+      "label": "do_run_migrations()",
+      "file_type": "code",
+      "source_file": "alembic/env.py",
+      "source_location": "L59",
+      "id": "alembic_env_do_run_migrations"
+    },
+    {
+      "label": "Run migrations in 'offline' mode.",
+      "file_type": "rationale",
+      "source_file": "alembic/env.py",
+      "source_location": "L33",
+      "id": "alembic_env_rationale_33"
+    },
+    {
+      "label": "Run migrations in 'online' mode.",
+      "file_type": "rationale",
+      "source_file": "alembic/env.py",
+      "source_location": "L46",
+      "id": "alembic_env_rationale_46"
+    },
+    {
+      "label": "This is the sync function that Alembic uses to run migrations.     The 'connecti",
+      "file_type": "rationale",
+      "source_file": "alembic/env.py",
+      "source_location": "L60",
+      "id": "alembic_env_rationale_60"
+    },
+    {
+      "label": "main.py",
+      "file_type": "code",
+      "source_file": "app/main.py",
+      "source_location": "L1",
+      "id": "app_main_py"
+    },
+    {
+      "label": "root()",
+      "file_type": "code",
+      "source_file": "app/main.py",
+      "source_location": "L44",
+      "id": "app_main_root"
+    },
+    {
+      "label": "detector.py",
+      "file_type": "code",
+      "source_file": "app/ai/detector.py",
+      "source_location": "L1",
+      "id": "app_ai_detector_py"
+    },
+    {
+      "label": "FaceDetector",
+      "file_type": "code",
+      "source_file": "app/ai/detector.py",
+      "source_location": "L6",
+      "id": "ai_detector_facedetector"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app/ai/detector.py",
+      "source_location": "L10",
+      "id": "ai_detector_facedetector_init"
+    },
+    {
+      "label": ".detect_faces()",
+      "file_type": "code",
+      "source_file": "app/ai/detector.py",
+      "source_location": "L15",
+      "id": "ai_detector_facedetector_detect_faces"
+    },
+    {
+      "label": "Wrapper for RetinaFace detection using InsightFace.",
+      "file_type": "rationale",
+      "source_file": "app/ai/detector.py",
+      "source_location": "L7",
+      "id": "ai_detector_rationale_7"
+    },
+    {
+      "label": "Detect faces and return bounding boxes.         Returns: List of (x1, y1, x2, y2",
+      "file_type": "rationale",
+      "source_file": "app/ai/detector.py",
+      "source_location": "L16",
+      "id": "ai_detector_rationale_16"
+    },
+    {
+      "label": "pipeline.py",
+      "file_type": "code",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L1",
+      "id": "app_ai_pipeline_py"
+    },
+    {
+      "label": "RecognitionPipeline",
+      "file_type": "code",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L7",
+      "id": "ai_pipeline_recognitionpipeline"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L11",
+      "id": "ai_pipeline_recognitionpipeline_init"
+    },
+    {
+      "label": ".generate_embedding()",
+      "file_type": "code",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L15",
+      "id": "ai_pipeline_recognitionpipeline_generate_embedding"
+    },
+    {
+      "label": ".process_classroom_image()",
+      "file_type": "code",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L37",
+      "id": "ai_pipeline_recognitionpipeline_process_classroom_image"
+    },
+    {
+      "label": "Orchestrates Face Detection and Recognition to generate face embeddings.",
+      "file_type": "rationale",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L8",
+      "id": "ai_pipeline_rationale_8"
+    },
+    {
+      "label": "Load image, detect the primary face, and return its embedding.",
+      "file_type": "rationale",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L16",
+      "id": "ai_pipeline_rationale_16"
+    },
+    {
+      "label": "Processes a classroom image to detect all faces and generate embeddings for each",
+      "file_type": "rationale",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L38",
+      "id": "ai_pipeline_rationale_38"
+    },
+    {
+      "label": "recognizer.py",
+      "file_type": "code",
+      "source_file": "app/ai/recognizer.py",
+      "source_location": "L1",
+      "id": "app_ai_recognizer_py"
+    },
+    {
+      "label": "FaceRecognizer",
+      "file_type": "code",
+      "source_file": "app/ai/recognizer.py",
+      "source_location": "L6",
+      "id": "ai_recognizer_facerecognizer"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app/ai/recognizer.py",
+      "source_location": "L10",
+      "id": "ai_recognizer_facerecognizer_init"
+    },
+    {
+      "label": ".get_embedding()",
+      "file_type": "code",
+      "source_file": "app/ai/recognizer.py",
+      "source_location": "L15",
+      "id": "ai_recognizer_facerecognizer_get_embedding"
+    },
+    {
+      "label": "Wrapper for ArcFace embedding generation using InsightFace.",
+      "file_type": "rationale",
+      "source_file": "app/ai/recognizer.py",
+      "source_location": "L7",
+      "id": "ai_recognizer_rationale_7"
+    },
+    {
+      "label": "Extract embedding for a specific face bounding box.",
+      "file_type": "rationale",
+      "source_file": "app/ai/recognizer.py",
+      "source_location": "L16",
+      "id": "ai_recognizer_rationale_16"
+    },
+    {
+      "label": "ai.py",
+      "file_type": "code",
+      "source_file": "app/api/ai.py",
+      "source_location": "L1",
+      "id": "app_api_ai_py"
+    },
+    {
+      "label": "generate_embeddings()",
+      "file_type": "code",
+      "source_file": "app/api/ai.py",
+      "source_location": "L11",
+      "id": "api_ai_generate_embeddings"
+    },
+    {
+      "label": "Trigger the AI pipeline to process all uploaded images for a student     and sto",
+      "file_type": "rationale",
+      "source_file": "app/api/ai.py",
+      "source_location": "L12",
+      "id": "api_ai_rationale_12"
+    },
+    {
+      "label": "attendance.py",
+      "file_type": "code",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L1",
+      "id": "app_api_attendance_py"
+    },
+    {
+      "label": "mark_attendance()",
+      "file_type": "code",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L16",
+      "id": "api_attendance_mark_attendance"
+    },
+    {
+      "label": "get_report()",
+      "file_type": "code",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L64",
+      "id": "api_attendance_get_report"
+    },
+    {
+      "label": "get_student_history()",
+      "file_type": "code",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L81",
+      "id": "api_attendance_get_student_history"
+    },
+    {
+      "label": "export_attendance_csv()",
+      "file_type": "code",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L96",
+      "id": "api_attendance_export_attendance_csv"
+    },
+    {
+      "label": "Recognizes students from a classroom image and marks their attendance.",
+      "file_type": "rationale",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L21",
+      "id": "api_attendance_rationale_21"
+    },
+    {
+      "label": "Generates an attendance report for a specific class and date.",
+      "file_type": "rationale",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L69",
+      "id": "api_attendance_rationale_69"
+    },
+    {
+      "label": "Retrieves attendance history for a specific student.",
+      "file_type": "rationale",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L85",
+      "id": "api_attendance_rationale_85"
+    },
+    {
+      "label": "Exports the attendance report as a CSV file.",
+      "file_type": "rationale",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L101",
+      "id": "api_attendance_rationale_101"
+    },
+    {
+      "label": "health.py",
+      "file_type": "code",
+      "source_file": "app/api/health.py",
+      "source_location": "L1",
+      "id": "app_api_health_py"
+    },
+    {
+      "label": "health_check()",
+      "file_type": "code",
+      "source_file": "app/api/health.py",
+      "source_location": "L9",
+      "id": "api_health_health_check"
+    },
+    {
+      "label": "recognition.py",
+      "file_type": "code",
+      "source_file": "app/api/recognition.py",
+      "source_location": "L1",
+      "id": "app_api_recognition_py"
+    },
+    {
+      "label": "recognize_classroom()",
+      "file_type": "code",
+      "source_file": "app/api/recognition.py",
+      "source_location": "L10",
+      "id": "api_recognition_recognize_classroom"
+    },
+    {
+      "label": "Upload a classroom image to detect and recognize all present students.     - Det",
+      "file_type": "rationale",
+      "source_file": "app/api/recognition.py",
+      "source_location": "L11",
+      "id": "api_recognition_rationale_11"
+    },
+    {
+      "label": "students.py",
+      "file_type": "code",
+      "source_file": "app/api/students.py",
+      "source_location": "L1",
+      "id": "app_api_students_py"
+    },
+    {
+      "label": "register_student()",
+      "file_type": "code",
+      "source_file": "app/api/students.py",
+      "source_location": "L12",
+      "id": "api_students_register_student"
+    },
+    {
+      "label": "list_students()",
+      "file_type": "code",
+      "source_file": "app/api/students.py",
+      "source_location": "L22",
+      "id": "api_students_list_students"
+    },
+    {
+      "label": "get_student()",
+      "file_type": "code",
+      "source_file": "app/api/students.py",
+      "source_location": "L28",
+      "id": "api_students_get_student"
+    },
+    {
+      "label": "upload_images()",
+      "file_type": "code",
+      "source_file": "app/api/students.py",
+      "source_location": "L37",
+      "id": "api_students_upload_images"
+    },
+    {
+      "label": "delete_student()",
+      "file_type": "code",
+      "source_file": "app/api/students.py",
+      "source_location": "L52",
+      "id": "api_students_delete_student"
+    },
+    {
+      "label": "Register a new student in the system.     - Validates metadata.     - Prevents",
+      "file_type": "rationale",
+      "source_file": "app/api/students.py",
+      "source_location": "L13",
+      "id": "api_students_rationale_13"
+    },
+    {
+      "label": "Retrieve a paginated list of all registered students.",
+      "file_type": "rationale",
+      "source_file": "app/api/students.py",
+      "source_location": "L23",
+      "id": "api_students_rationale_23"
+    },
+    {
+      "label": "Retrieve detailed metadata for a specific student.",
+      "file_type": "rationale",
+      "source_file": "app/api/students.py",
+      "source_location": "L29",
+      "id": "api_students_rationale_29"
+    },
+    {
+      "label": "Upload one or more reference images for a student.     - Validates student exis",
+      "file_type": "rationale",
+      "source_file": "app/api/students.py",
+      "source_location": "L42",
+      "id": "api_students_rationale_42"
+    },
+    {
+      "label": "Completely remove a student from the system.     - Deletes student metadata.",
+      "file_type": "rationale",
+      "source_file": "app/api/students.py",
+      "source_location": "L53",
+      "id": "api_students_rationale_53"
+    },
+    {
+      "label": "config.py",
+      "file_type": "code",
+      "source_file": "app/core/config.py",
+      "source_location": "L1",
+      "id": "app_core_config_py"
+    },
+    {
+      "label": "Settings",
+      "file_type": "code",
+      "source_file": "app/core/config.py",
+      "source_location": "L4",
+      "id": "core_config_settings"
+    },
+    {
+      "label": "BaseSettings",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "basesettings"
+    },
+    {
+      "label": "session.py",
+      "file_type": "code",
+      "source_file": "app/db/session.py",
+      "source_location": "L1",
+      "id": "app_db_session_py"
+    },
+    {
+      "label": "Base",
+      "file_type": "code",
+      "source_file": "app/db/session.py",
+      "source_location": "L5",
+      "id": "db_session_base"
+    },
+    {
+      "label": "DeclarativeBase",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "declarativebase"
+    },
+    {
+      "label": "get_db()",
+      "file_type": "code",
+      "source_file": "app/db/session.py",
+      "source_location": "L22",
+      "id": "db_session_get_db"
+    },
+    {
+      "label": "models.py",
+      "file_type": "code",
+      "source_file": "app/models/models.py",
+      "source_location": "L1",
+      "id": "app_models_models_py"
+    },
+    {
+      "label": "Student",
+      "file_type": "code",
+      "source_file": "app/models/models.py",
+      "source_location": "L6",
+      "id": "models_models_student"
+    },
+    {
+      "label": "Base",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "base"
+    },
+    {
+      "label": "Embedding",
+      "file_type": "code",
+      "source_file": "app/models/models.py",
+      "source_location": "L19",
+      "id": "models_models_embedding"
+    },
+    {
+      "label": "Attendance",
+      "file_type": "code",
+      "source_file": "app/models/models.py",
+      "source_location": "L29",
+      "id": "models_models_attendance"
+    },
+    {
+      "label": "Admin",
+      "file_type": "code",
+      "source_file": "app/models/models.py",
+      "source_location": "L42",
+      "id": "models_models_admin"
+    },
+    {
+      "label": "student.py",
+      "file_type": "code",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L1",
+      "id": "app_schemas_student_py"
+    },
+    {
+      "label": "StudentBase",
+      "file_type": "code",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L5",
+      "id": "schemas_student_studentbase"
+    },
+    {
+      "label": "BaseModel",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "basemodel"
+    },
+    {
+      "label": "StudentCreate",
+      "file_type": "code",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L11",
+      "id": "schemas_student_studentcreate"
+    },
+    {
+      "label": "StudentUpdate",
+      "file_type": "code",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L14",
+      "id": "schemas_student_studentupdate"
+    },
+    {
+      "label": "StudentResponse",
+      "file_type": "code",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L20",
+      "id": "schemas_student_studentresponse"
+    },
+    {
+      "label": "StudentImageResponse",
+      "file_type": "code",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L30",
+      "id": "schemas_student_studentimageresponse"
+    },
+    {
+      "label": "ai_service.py",
+      "file_type": "code",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L1",
+      "id": "app_services_ai_service_py"
+    },
+    {
+      "label": "AIService",
+      "file_type": "code",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L14",
+      "id": "services_ai_service_aiservice"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L21",
+      "id": "services_ai_service_aiservice_init"
+    },
+    {
+      "label": ".process_student_embeddings()",
+      "file_type": "code",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L27",
+      "id": "services_ai_service_aiservice_process_student_embeddings"
+    },
+    {
+      "label": "Service to handle AI-related operations and coordinate with the database.     Im",
+      "file_type": "rationale",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L15",
+      "id": "services_ai_service_rationale_15"
+    },
+    {
+      "label": "Finds all images for a student, generates embeddings, and stores them in DB.",
+      "file_type": "rationale",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L28",
+      "id": "services_ai_service_rationale_28"
+    },
+    {
+      "label": "attendance_service.py",
+      "file_type": "code",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L1",
+      "id": "app_services_attendance_service_py"
+    },
+    {
+      "label": "AttendanceService",
+      "file_type": "code",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L6",
+      "id": "services_attendance_service_attendanceservice"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L7",
+      "id": "services_attendance_service_attendanceservice_init"
+    },
+    {
+      "label": ".mark_attendance()",
+      "file_type": "code",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L10",
+      "id": "services_attendance_service_attendanceservice_mark_attendance"
+    },
+    {
+      "label": ".get_attendance_report()",
+      "file_type": "code",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L48",
+      "id": "services_attendance_service_attendanceservice_get_attendance_report"
+    },
+    {
+      "label": ".get_student_history()",
+      "file_type": "code",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L83",
+      "id": "services_attendance_service_attendanceservice_get_student_history"
+    },
+    {
+      "label": "Marks a student as present for a specific class on the current date.         If",
+      "file_type": "rationale",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L11",
+      "id": "services_attendance_service_rationale_11"
+    },
+    {
+      "label": "Generates a report for a specific class on a given date.         Identifies pres",
+      "file_type": "rationale",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L49",
+      "id": "services_attendance_service_rationale_49"
+    },
+    {
+      "label": "Retrieves all attendance records for a specific student.",
+      "file_type": "rationale",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L84",
+      "id": "services_attendance_service_rationale_84"
+    },
+    {
+      "label": "classroom_recognition_service.py",
+      "file_type": "code",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L1",
+      "id": "app_services_classroom_recognition_service_py"
+    },
+    {
+      "label": "ClassroomRecognitionService",
+      "file_type": "code",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L17",
+      "id": "services_classroom_recognition_service_classroomrecognitionservice"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L21",
+      "id": "services_classroom_recognition_service_classroomrecognitionservice_init"
+    },
+    {
+      "label": ".recognize_classroom()",
+      "file_type": "code",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L28",
+      "id": "services_classroom_recognition_service_classroomrecognitionservice_recognize_classroom"
+    },
+    {
+      "label": "Orchestrator for multi-face recognition in classroom images.",
+      "file_type": "rationale",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L18",
+      "id": "services_classroom_recognition_service_rationale_18"
+    },
+    {
+      "label": "similarity_service.py",
+      "file_type": "code",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L1",
+      "id": "app_services_similarity_service_py"
+    },
+    {
+      "label": "SimilarityService",
+      "file_type": "code",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L5",
+      "id": "services_similarity_service_similarityservice"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L9",
+      "id": "services_similarity_service_similarityservice_init"
+    },
+    {
+      "label": ".calculate_cosine_similarity()",
+      "file_type": "code",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L12",
+      "id": "services_similarity_service_similarityservice_calculate_cosine_similarity"
+    },
+    {
+      "label": ".find_best_match()",
+      "file_type": "code",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L30",
+      "id": "services_similarity_service_similarityservice_find_best_match"
+    },
+    {
+      "label": "Service to handle embedding comparisons using cosine similarity.",
+      "file_type": "rationale",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L6",
+      "id": "services_similarity_service_rationale_6"
+    },
+    {
+      "label": "Calculate cosine similarity between two vectors.         Formula: (A . B) / (||A",
+      "file_type": "rationale",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L13",
+      "id": "services_similarity_service_rationale_13"
+    },
+    {
+      "label": "Compare a live embedding against a list of (student_id, embedding) tuples.",
+      "file_type": "rationale",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L31",
+      "id": "services_similarity_service_rationale_31"
+    },
+    {
+      "label": "student_service.py",
+      "file_type": "code",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L1",
+      "id": "app_services_student_service_py"
+    },
+    {
+      "label": "StudentService",
+      "file_type": "code",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L16",
+      "id": "services_student_service_studentservice"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L17",
+      "id": "services_student_service_studentservice_init"
+    },
+    {
+      "label": "._count_uploaded_images()",
+      "file_type": "code",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L21",
+      "id": "services_student_service_studentservice_count_uploaded_images"
+    },
+    {
+      "label": "._count_embeddings()",
+      "file_type": "code",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L33",
+      "id": "services_student_service_studentservice_count_embeddings"
+    },
+    {
+      "label": "._build_student_response()",
+      "file_type": "code",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L38",
+      "id": "services_student_service_studentservice_build_student_response"
+    },
+    {
+      "label": ".create_student()",
+      "file_type": "code",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L55",
+      "id": "services_student_service_studentservice_create_student"
+    },
+    {
+      "label": ".get_student()",
+      "file_type": "code",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L79",
+      "id": "services_student_service_studentservice_get_student"
+    },
+    {
+      "label": ".list_students()",
+      "file_type": "code",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L83",
+      "id": "services_student_service_studentservice_list_students"
+    },
+    {
+      "label": ".get_student_response()",
+      "file_type": "code",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L88",
+      "id": "services_student_service_studentservice_get_student_response"
+    },
+    {
+      "label": ".upload_student_images()",
+      "file_type": "code",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L94",
+      "id": "services_student_service_studentservice_upload_student_images"
+    },
+    {
+      "label": ".delete_student()",
+      "file_type": "code",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L149",
+      "id": "services_student_service_studentservice_delete_student"
+    },
+    {
+      "label": "Completely removes a student, including their embeddings,         attendance re",
+      "file_type": "rationale",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L150",
+      "id": "services_student_service_rationale_150"
+    },
+    {
+      "label": "eslint.config.js",
+      "file_type": "code",
+      "source_file": "frontend/eslint.config.js",
+      "source_location": "L1",
+      "id": "frontend_eslint_config_js"
+    },
+    {
+      "label": "postcss.config.js",
+      "file_type": "code",
+      "source_file": "frontend/postcss.config.js",
+      "source_location": "L1",
+      "id": "frontend_postcss_config_js"
+    },
+    {
+      "label": "tailwind.config.js",
+      "file_type": "code",
+      "source_file": "frontend/tailwind.config.js",
+      "source_location": "L1",
+      "id": "frontend_tailwind_config_js"
+    },
+    {
+      "label": "vite.config.ts",
+      "file_type": "code",
+      "source_file": "frontend/vite.config.ts",
+      "source_location": "L1",
+      "id": "frontend_vite_config_ts"
+    },
+    {
+      "label": "App.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/App.tsx",
+      "source_location": "L1",
+      "id": "frontend_src_app_tsx"
+    },
+    {
+      "label": "App()",
+      "file_type": "code",
+      "source_file": "frontend/src/App.tsx",
+      "source_location": "L8",
+      "id": "src_app_app"
+    },
+    {
+      "label": "main.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L1",
+      "id": "frontend_src_main_tsx"
+    },
+    {
+      "label": "client.ts",
+      "file_type": "code",
+      "source_file": "frontend/src/api/client.ts",
+      "source_location": "L1",
+      "id": "frontend_src_api_client_ts"
+    },
+    {
+      "label": "Student",
+      "file_type": "code",
+      "source_file": "frontend/src/api/client.ts",
+      "source_location": "L5",
+      "id": "api_client_student"
+    },
+    {
+      "label": "StudentCreateInput",
+      "file_type": "code",
+      "source_file": "frontend/src/api/client.ts",
+      "source_location": "L17",
+      "id": "api_client_studentcreateinput"
+    },
+    {
+      "label": "apiClient",
+      "file_type": "code",
+      "source_file": "frontend/src/api/client.ts",
+      "source_location": "L24",
+      "id": "api_client_apiclient"
+    },
+    {
+      "label": "studentService",
+      "file_type": "code",
+      "source_file": "frontend/src/api/client.ts",
+      "source_location": "L31",
+      "id": "api_client_studentservice"
+    },
+    {
+      "label": "ThemeToggle.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/components/common/ThemeToggle.tsx",
+      "source_location": "L1",
+      "id": "frontend_src_components_common_themetoggle_tsx"
+    },
+    {
+      "label": "ThemeToggle()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/common/ThemeToggle.tsx",
+      "source_location": "L5",
+      "id": "common_themetoggle_themetoggle"
+    },
+    {
+      "label": "DashboardLayout.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/components/layout/DashboardLayout.tsx",
+      "source_location": "L1",
+      "id": "frontend_src_components_layout_dashboardlayout_tsx"
+    },
+    {
+      "label": "SidebarItemProps",
+      "file_type": "code",
+      "source_file": "frontend/src/components/layout/DashboardLayout.tsx",
+      "source_location": "L5",
+      "id": "layout_dashboardlayout_sidebaritemprops"
+    },
+    {
+      "label": "SidebarItem()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/layout/DashboardLayout.tsx",
+      "source_location": "L12",
+      "id": "layout_dashboardlayout_sidebaritem"
+    },
+    {
+      "label": "DashboardLayout()",
+      "file_type": "code",
+      "source_file": "frontend/src/components/layout/DashboardLayout.tsx",
+      "source_location": "L25",
+      "id": "layout_dashboardlayout_dashboardlayout"
+    },
+    {
+      "label": "AnalyticsPage.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Analytics/AnalyticsPage.tsx",
+      "source_location": "L1",
+      "id": "frontend_src_pages_analytics_analyticspage_tsx"
+    },
+    {
+      "label": "AnalyticsEntry",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Analytics/AnalyticsPage.tsx",
+      "source_location": "L5",
+      "id": "analytics_analyticspage_analyticsentry"
+    },
+    {
+      "label": "AnalyticsPage()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Analytics/AnalyticsPage.tsx",
+      "source_location": "L10",
+      "id": "analytics_analyticspage_analyticspage"
+    },
+    {
+      "label": "MarkAttendancePage.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/MarkAttendance/MarkAttendancePage.tsx",
+      "source_location": "L1",
+      "id": "frontend_src_pages_markattendance_markattendancepage_tsx"
+    },
+    {
+      "label": "RecognitionResult",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/MarkAttendance/MarkAttendancePage.tsx",
+      "source_location": "L5",
+      "id": "markattendance_markattendancepage_recognitionresult"
+    },
+    {
+      "label": "AttendanceSession",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/MarkAttendance/MarkAttendancePage.tsx",
+      "source_location": "L10",
+      "id": "markattendance_markattendancepage_attendancesession"
+    },
+    {
+      "label": "AttendanceMarkResponse",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/MarkAttendance/MarkAttendancePage.tsx",
+      "source_location": "L15",
+      "id": "markattendance_markattendancepage_attendancemarkresponse"
+    },
+    {
+      "label": "MarkAttendancePage()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/MarkAttendance/MarkAttendancePage.tsx",
+      "source_location": "L22",
+      "id": "markattendance_markattendancepage_markattendancepage"
+    },
+    {
+      "label": "ReportsPage.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Reports/ReportsPage.tsx",
+      "source_location": "L1",
+      "id": "frontend_src_pages_reports_reportspage_tsx"
+    },
+    {
+      "label": "ReportEntry",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Reports/ReportsPage.tsx",
+      "source_location": "L5",
+      "id": "reports_reportspage_reportentry"
+    },
+    {
+      "label": "AttendanceReportResponse",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Reports/ReportsPage.tsx",
+      "source_location": "L14",
+      "id": "reports_reportspage_attendancereportresponse"
+    },
+    {
+      "label": "isValidISODate()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Reports/ReportsPage.tsx",
+      "source_location": "L18",
+      "id": "reports_reportspage_isvalidisodate"
+    },
+    {
+      "label": "ReportsPage()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Reports/ReportsPage.tsx",
+      "source_location": "L20",
+      "id": "reports_reportspage_reportspage"
+    },
+    {
+      "label": "StudentsPage.tsx",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Students/StudentsPage.tsx",
+      "source_location": "L1",
+      "id": "frontend_src_pages_students_studentspage_tsx"
+    },
+    {
+      "label": "StatusMessage",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Students/StudentsPage.tsx",
+      "source_location": "L5",
+      "id": "students_studentspage_statusmessage"
+    },
+    {
+      "label": "getErrorMessage()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Students/StudentsPage.tsx",
+      "source_location": "L10",
+      "id": "students_studentspage_geterrormessage"
+    },
+    {
+      "label": "StudentsPage()",
+      "file_type": "code",
+      "source_file": "frontend/src/pages/Students/StudentsPage.tsx",
+      "source_location": "L18",
+      "id": "students_studentspage_studentspage"
+    },
+    {
+      "label": "themeStore.ts",
+      "file_type": "code",
+      "source_file": "frontend/src/store/themeStore.ts",
+      "source_location": "L1",
+      "id": "frontend_src_store_themestore_ts"
+    },
+    {
+      "label": "ThemeState",
+      "file_type": "code",
+      "source_file": "frontend/src/store/themeStore.ts",
+      "source_location": "L4",
+      "id": "store_themestore_themestate"
+    },
+    {
+      "label": "useThemeStore",
+      "file_type": "code",
+      "source_file": "frontend/src/store/themeStore.ts",
+      "source_location": "L10",
+      "id": "store_themestore_usethemestore"
+    },
+    {
+      "label": "FastAPI",
+      "file_type": "code",
+      "id": "FastAPI"
+    },
+    {
+      "label": "FastAPI Application",
+      "file_type": "code",
+      "id": "app"
+    },
+    {
+      "label": "Student Model",
+      "file_type": "code",
+      "id": "Student"
+    },
+    {
+      "label": "Embedding Model",
+      "file_type": "code",
+      "id": "Embedding"
+    },
+    {
+      "label": "Attendance Model",
+      "file_type": "code",
+      "id": "Attendance"
+    },
+    {
+      "label": "FaceDetector",
+      "file_type": "code",
+      "id": "FaceDetector"
+    },
+    {
+      "label": "FaceRecognizer",
+      "file_type": "code",
+      "id": "FaceRecognizer"
+    },
+    {
+      "label": "RecognitionPipeline",
+      "file_type": "code",
+      "id": "RecognitionPipeline"
+    },
+    {
+      "label": "StudentService",
+      "file_type": "code",
+      "id": "StudentService"
+    },
+    {
+      "label": "AIService",
+      "file_type": "code",
+      "id": "AIService"
+    },
+    {
+      "label": "AttendanceService",
+      "file_type": "code",
+      "id": "AttendanceService"
+    },
+    {
+      "label": "ClassroomRecognitionService",
+      "file_type": "code",
+      "id": "ClassroomRecognitionService"
+    },
+    {
+      "label": "SimilarityService",
+      "file_type": "code",
+      "id": "SimilarityService"
+    },
+    {
+      "label": "health router",
+      "file_type": "code",
+      "id": "health_router"
+    },
+    {
+      "label": "student router",
+      "file_type": "code",
+      "id": "student_router"
+    },
+    {
+      "label": "ai router",
+      "file_type": "code",
+      "id": "ai_router"
+    },
+    {
+      "label": "recognition router",
+      "file_type": "code",
+      "id": "recognition_router"
+    },
+    {
+      "label": "attendance router",
+      "file_type": "code",
+      "id": "attendance_router"
+    },
+    {
+      "label": "Admin Model",
+      "file_type": "code",
+      "id": "Admin"
+    },
+    {
+      "label": "Settings Configuration",
+      "file_type": "code",
+      "id": "Settings"
+    },
+    {
+      "label": "SQLAlchemy DeclarativeBase",
+      "file_type": "code",
+      "id": "Base"
+    },
+    {
+      "label": "SQLAlchemy AsyncSession",
+      "file_type": "code",
+      "id": "AsyncSession"
+    },
+    {
+      "label": "get_db dependency",
+      "file_type": "code",
+      "id": "get_db"
+    },
+    {
+      "label": "StudentCreate Schema",
+      "file_type": "code",
+      "id": "StudentCreate"
+    },
+    {
+      "label": "StudentResponse Schema",
+      "file_type": "code",
+      "id": "StudentResponse"
+    },
+    {
+      "label": "InsightFace",
+      "file_type": "code",
+      "id": "InsightFace"
+    },
+    {
+      "label": "PostgreSQL Database",
+      "file_type": "code",
+      "id": "PostgreSQL"
+    },
+    {
+      "label": "SmartAttend Platform",
+      "file_type": "code",
+      "id": "smartattend_platform"
+    },
+    {
+      "label": "Frontend Application",
+      "file_type": "code",
+      "id": "frontend_app"
+    },
+    {
+      "label": "Backend System",
+      "file_type": "code",
+      "id": "backend_system"
+    },
+    {
+      "label": "React",
+      "file_type": "code",
+      "id": "react"
+    },
+    {
+      "label": "TypeScript",
+      "file_type": "code",
+      "id": "typescript"
+    },
+    {
+      "label": "Vite",
+      "file_type": "code",
+      "id": "vite"
+    },
+    {
+      "label": "Tailwind CSS",
+      "file_type": "code",
+      "id": "tailwind"
+    },
+    {
+      "label": "Zustand",
+      "file_type": "code",
+      "id": "zustand"
+    },
+    {
+      "label": "FastAPI",
+      "file_type": "code",
+      "id": "fastapi"
+    },
+    {
+      "label": "SQLAlchemy",
+      "file_type": "code",
+      "id": "sqlalchemy"
+    },
+    {
+      "label": "PostgreSQL",
+      "file_type": "code",
+      "id": "postgres"
+    },
+    {
+      "label": "InsightFace",
+      "file_type": "code",
+      "id": "insightface"
+    },
+    {
+      "label": "OpenCV",
+      "file_type": "code",
+      "id": "opencv"
+    },
+    {
+      "label": "Docker",
+      "file_type": "code",
+      "id": "docker"
+    },
+    {
+      "label": "DashboardLayout",
+      "file_type": "code",
+      "id": "dashboard_layout"
+    },
+    {
+      "label": "StudentsPage",
+      "file_type": "code",
+      "id": "students_page"
+    },
+    {
+      "label": "MarkAttendancePage",
+      "file_type": "code",
+      "id": "mark_attendance_page"
+    },
+    {
+      "label": "ReportsPage",
+      "file_type": "code",
+      "id": "reports_page"
+    },
+    {
+      "label": "AnalyticsPage",
+      "file_type": "code",
+      "id": "analytics_page"
+    },
+    {
+      "label": "ThemeToggle",
+      "file_type": "code",
+      "id": "theme_toggle"
+    },
+    {
+      "label": "themeStore",
+      "file_type": "code",
+      "id": "theme_store"
+    },
+    {
+      "label": "apiClient",
+      "file_type": "code",
+      "id": "api_client"
+    },
+    {
+      "label": "Student Interface",
+      "file_type": "code",
+      "id": "student_interface"
+    },
+    {
+      "label": "Attendance Marking",
+      "file_type": "code",
+      "id": "attendance_marking"
+    },
+    {
+      "label": "Face Recognition",
+      "file_type": "code",
+      "id": "face_recognition"
+    },
+    {
+      "label": "Embedding Generation",
+      "file_type": "code",
+      "id": "embedding_generation"
+    },
+    {
+      "label": "Attendance Report",
+      "file_type": "code",
+      "id": "attendance_report"
+    },
+    {
+      "label": "Dark Mode Theme",
+      "file_type": "code",
+      "id": "dark_mode_theme"
+    },
+    {
+      "label": "Light Mode Theme",
+      "file_type": "code",
+      "id": "light_mode_theme"
+    },
+    {
+      "label": "PROJECT_IMPROVEMENT_PLAN.md",
+      "file_type": "document",
+      "id": "improvement_plan_doc"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "id": "readme_doc"
+    },
+    {
+      "label": "vite.config.ts",
+      "file_type": "code",
+      "id": "vite_config"
+    },
+    {
+      "label": "tailwind.config.js",
+      "file_type": "code",
+      "id": "tailwind_config"
+    },
+    {
+      "label": "docker-compose.yml",
+      "file_type": "code",
+      "id": "docker_compose"
+    },
+    {
+      "label": "requirements.txt",
+      "file_type": "code",
+      "id": "requirements"
+    }
+  ],
+  "edges": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "test_api.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "test_api_py",
+      "_tgt": "smart_attendance_system_test_api_test",
+      "source": "test_api_py",
+      "target": "smart_attendance_system_test_api_test"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "alembic/env.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "alembic_env_py",
+      "_tgt": "sqlalchemy",
+      "source": "alembic_env_py",
+      "target": "sqlalchemy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "alembic/env.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_src": "alembic_env_py",
+      "_tgt": "alembic_env_run_migrations_offline",
+      "source": "alembic_env_py",
+      "target": "alembic_env_run_migrations_offline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "alembic/env.py",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_src": "alembic_env_py",
+      "_tgt": "alembic_env_run_migrations_online",
+      "source": "alembic_env_py",
+      "target": "alembic_env_run_migrations_online"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "alembic/env.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_src": "alembic_env_py",
+      "_tgt": "alembic_env_do_run_migrations",
+      "source": "alembic_env_py",
+      "target": "alembic_env_do_run_migrations"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "alembic/env.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_src": "alembic_env_rationale_33",
+      "_tgt": "alembic_env_run_migrations_offline",
+      "source": "alembic_env_run_migrations_offline",
+      "target": "alembic_env_rationale_33"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "alembic/env.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_src": "alembic_env_rationale_46",
+      "_tgt": "alembic_env_run_migrations_online",
+      "source": "alembic_env_run_migrations_online",
+      "target": "alembic_env_rationale_46"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "alembic/env.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_src": "alembic_env_rationale_60",
+      "_tgt": "alembic_env_do_run_migrations",
+      "source": "alembic_env_do_run_migrations",
+      "target": "alembic_env_rationale_60"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/main.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "app_main_py",
+      "_tgt": "fastapi",
+      "source": "app_main_py",
+      "target": "fastapi"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/main.py",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_src": "app_main_py",
+      "_tgt": "app_main_root",
+      "source": "app_main_py",
+      "target": "app_main_root"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/detector.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "app_ai_detector_py",
+      "_tgt": "ai_detector_facedetector",
+      "source": "app_ai_detector_py",
+      "target": "ai_detector_facedetector"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/detector.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "ai_detector_facedetector",
+      "_tgt": "ai_detector_facedetector_init",
+      "source": "ai_detector_facedetector",
+      "target": "ai_detector_facedetector_init"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/detector.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_src": "ai_detector_facedetector",
+      "_tgt": "ai_detector_facedetector_detect_faces",
+      "source": "ai_detector_facedetector",
+      "target": "ai_detector_facedetector_detect_faces"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/detector.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_src": "ai_detector_rationale_7",
+      "_tgt": "ai_detector_facedetector",
+      "source": "ai_detector_facedetector",
+      "target": "ai_detector_rationale_7"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L3",
+      "weight": 0.8,
+      "_src": "ai_pipeline_recognitionpipeline",
+      "_tgt": "ai_detector_facedetector",
+      "source": "ai_detector_facedetector",
+      "target": "ai_pipeline_recognitionpipeline"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "ai_pipeline_recognitionpipeline_init",
+      "_tgt": "ai_detector_facedetector",
+      "source": "ai_detector_facedetector",
+      "target": "ai_pipeline_recognitionpipeline_init"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/detector.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "ai_detector_rationale_16",
+      "_tgt": "ai_detector_facedetector_detect_faces",
+      "source": "ai_detector_facedetector_detect_faces",
+      "target": "ai_detector_rationale_16"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_src": "app_ai_pipeline_py",
+      "_tgt": "ai_pipeline_recognitionpipeline",
+      "source": "app_ai_pipeline_py",
+      "target": "ai_pipeline_recognitionpipeline"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "ai_pipeline_recognitionpipeline",
+      "_tgt": "ai_pipeline_recognitionpipeline_init",
+      "source": "ai_pipeline_recognitionpipeline",
+      "target": "ai_pipeline_recognitionpipeline_init"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_src": "ai_pipeline_recognitionpipeline",
+      "_tgt": "ai_pipeline_recognitionpipeline_generate_embedding",
+      "source": "ai_pipeline_recognitionpipeline",
+      "target": "ai_pipeline_recognitionpipeline_generate_embedding"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "ai_pipeline_recognitionpipeline",
+      "_tgt": "ai_pipeline_recognitionpipeline_process_classroom_image",
+      "source": "ai_pipeline_recognitionpipeline",
+      "target": "ai_pipeline_recognitionpipeline_process_classroom_image"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_src": "ai_pipeline_rationale_8",
+      "_tgt": "ai_pipeline_recognitionpipeline",
+      "source": "ai_pipeline_recognitionpipeline",
+      "target": "ai_pipeline_rationale_8"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L4",
+      "weight": 0.8,
+      "_src": "ai_pipeline_recognitionpipeline",
+      "_tgt": "ai_recognizer_facerecognizer",
+      "source": "ai_pipeline_recognitionpipeline",
+      "target": "ai_recognizer_facerecognizer"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "_src": "services_ai_service_aiservice",
+      "_tgt": "ai_pipeline_recognitionpipeline",
+      "source": "ai_pipeline_recognitionpipeline",
+      "target": "services_ai_service_aiservice"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L13",
+      "weight": 0.8,
+      "_src": "services_classroom_recognition_service_classroomrecognitionservice",
+      "_tgt": "ai_pipeline_recognitionpipeline",
+      "source": "ai_pipeline_recognitionpipeline",
+      "target": "services_classroom_recognition_service_classroomrecognitionservice"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_src": "services_ai_service_aiservice_init",
+      "_tgt": "ai_pipeline_recognitionpipeline",
+      "source": "ai_pipeline_recognitionpipeline",
+      "target": "services_ai_service_aiservice_init"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_src": "services_classroom_recognition_service_classroomrecognitionservice_init",
+      "_tgt": "ai_pipeline_recognitionpipeline",
+      "source": "ai_pipeline_recognitionpipeline",
+      "target": "services_classroom_recognition_service_classroomrecognitionservice_init"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "ai_pipeline_recognitionpipeline_init",
+      "_tgt": "ai_recognizer_facerecognizer",
+      "source": "ai_pipeline_recognitionpipeline_init",
+      "target": "ai_recognizer_facerecognizer"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "ai_pipeline_rationale_16",
+      "_tgt": "ai_pipeline_recognitionpipeline_generate_embedding",
+      "source": "ai_pipeline_recognitionpipeline_generate_embedding",
+      "target": "ai_pipeline_rationale_16"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/pipeline.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_src": "ai_pipeline_rationale_38",
+      "_tgt": "ai_pipeline_recognitionpipeline_process_classroom_image",
+      "source": "ai_pipeline_recognitionpipeline_process_classroom_image",
+      "target": "ai_pipeline_rationale_38"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/recognizer.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "app_ai_recognizer_py",
+      "_tgt": "ai_recognizer_facerecognizer",
+      "source": "app_ai_recognizer_py",
+      "target": "ai_recognizer_facerecognizer"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/recognizer.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "ai_recognizer_facerecognizer",
+      "_tgt": "ai_recognizer_facerecognizer_init",
+      "source": "ai_recognizer_facerecognizer",
+      "target": "ai_recognizer_facerecognizer_init"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/recognizer.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_src": "ai_recognizer_facerecognizer",
+      "_tgt": "ai_recognizer_facerecognizer_get_embedding",
+      "source": "ai_recognizer_facerecognizer",
+      "target": "ai_recognizer_facerecognizer_get_embedding"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/recognizer.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_src": "ai_recognizer_rationale_7",
+      "_tgt": "ai_recognizer_facerecognizer",
+      "source": "ai_recognizer_facerecognizer",
+      "target": "ai_recognizer_rationale_7"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/ai/recognizer.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "ai_recognizer_rationale_16",
+      "_tgt": "ai_recognizer_facerecognizer_get_embedding",
+      "source": "ai_recognizer_facerecognizer_get_embedding",
+      "target": "ai_recognizer_rationale_16"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/ai.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "app_api_ai_py",
+      "_tgt": "fastapi",
+      "source": "app_api_ai_py",
+      "target": "fastapi"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/ai.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "app_api_ai_py",
+      "_tgt": "api_ai_generate_embeddings",
+      "source": "app_api_ai_py",
+      "target": "api_ai_generate_embeddings"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/ai.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "api_ai_rationale_12",
+      "_tgt": "api_ai_generate_embeddings",
+      "source": "api_ai_generate_embeddings",
+      "target": "api_ai_rationale_12"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/api/ai.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "api_ai_generate_embeddings",
+      "_tgt": "services_ai_service_aiservice",
+      "source": "api_ai_generate_embeddings",
+      "target": "services_ai_service_aiservice"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "app_api_attendance_py",
+      "_tgt": "fastapi",
+      "source": "app_api_attendance_py",
+      "target": "fastapi"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "app_api_attendance_py",
+      "_tgt": "api_attendance_mark_attendance",
+      "source": "app_api_attendance_py",
+      "target": "api_attendance_mark_attendance"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_src": "app_api_attendance_py",
+      "_tgt": "api_attendance_get_report",
+      "source": "app_api_attendance_py",
+      "target": "api_attendance_get_report"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_src": "app_api_attendance_py",
+      "_tgt": "api_attendance_get_student_history",
+      "source": "app_api_attendance_py",
+      "target": "api_attendance_get_student_history"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_src": "app_api_attendance_py",
+      "_tgt": "api_attendance_export_attendance_csv",
+      "source": "app_api_attendance_py",
+      "target": "api_attendance_export_attendance_csv"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_src": "api_attendance_rationale_21",
+      "_tgt": "api_attendance_mark_attendance",
+      "source": "api_attendance_mark_attendance",
+      "target": "api_attendance_rationale_21"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/api/attendance.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_src": "api_attendance_mark_attendance",
+      "_tgt": "services_classroom_recognition_service_classroomrecognitionservice",
+      "source": "api_attendance_mark_attendance",
+      "target": "services_classroom_recognition_service_classroomrecognitionservice"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/api/attendance.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_src": "api_attendance_mark_attendance",
+      "_tgt": "services_similarity_service_similarityservice",
+      "source": "api_attendance_mark_attendance",
+      "target": "services_similarity_service_similarityservice"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/api/attendance.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_src": "api_attendance_mark_attendance",
+      "_tgt": "services_attendance_service_attendanceservice",
+      "source": "api_attendance_mark_attendance",
+      "target": "services_attendance_service_attendanceservice"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_src": "api_attendance_rationale_69",
+      "_tgt": "api_attendance_get_report",
+      "source": "api_attendance_get_report",
+      "target": "api_attendance_rationale_69"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/api/attendance.py",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_src": "api_attendance_get_report",
+      "_tgt": "services_attendance_service_attendanceservice",
+      "source": "api_attendance_get_report",
+      "target": "services_attendance_service_attendanceservice"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_src": "api_attendance_rationale_85",
+      "_tgt": "api_attendance_get_student_history",
+      "source": "api_attendance_get_student_history",
+      "target": "api_attendance_rationale_85"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/api/attendance.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_src": "api_attendance_get_student_history",
+      "_tgt": "services_attendance_service_attendanceservice",
+      "source": "api_attendance_get_student_history",
+      "target": "services_attendance_service_attendanceservice"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/attendance.py",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_src": "api_attendance_rationale_101",
+      "_tgt": "api_attendance_export_attendance_csv",
+      "source": "api_attendance_export_attendance_csv",
+      "target": "api_attendance_rationale_101"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/api/attendance.py",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_src": "api_attendance_export_attendance_csv",
+      "_tgt": "services_attendance_service_attendanceservice",
+      "source": "api_attendance_export_attendance_csv",
+      "target": "services_attendance_service_attendanceservice"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/health.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "app_api_health_py",
+      "_tgt": "fastapi",
+      "source": "app_api_health_py",
+      "target": "fastapi"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/health.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "app_api_health_py",
+      "_tgt": "sqlalchemy",
+      "source": "app_api_health_py",
+      "target": "sqlalchemy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/health.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_src": "app_api_health_py",
+      "_tgt": "api_health_health_check",
+      "source": "app_api_health_py",
+      "target": "api_health_health_check"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/recognition.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "app_api_recognition_py",
+      "_tgt": "fastapi",
+      "source": "app_api_recognition_py",
+      "target": "fastapi"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/recognition.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "app_api_recognition_py",
+      "_tgt": "api_recognition_recognize_classroom",
+      "source": "app_api_recognition_py",
+      "target": "api_recognition_recognize_classroom"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/recognition.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "api_recognition_rationale_11",
+      "_tgt": "api_recognition_recognize_classroom",
+      "source": "api_recognition_recognize_classroom",
+      "target": "api_recognition_rationale_11"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/api/recognition.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_src": "api_recognition_recognize_classroom",
+      "_tgt": "services_classroom_recognition_service_classroomrecognitionservice",
+      "source": "api_recognition_recognize_classroom",
+      "target": "services_classroom_recognition_service_classroomrecognitionservice"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/students.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "app_api_students_py",
+      "_tgt": "fastapi",
+      "source": "app_api_students_py",
+      "target": "fastapi"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/students.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "app_api_students_py",
+      "_tgt": "api_students_register_student",
+      "source": "app_api_students_py",
+      "target": "api_students_register_student"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/students.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_src": "app_api_students_py",
+      "_tgt": "api_students_list_students",
+      "source": "app_api_students_py",
+      "target": "api_students_list_students"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/students.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_src": "app_api_students_py",
+      "_tgt": "api_students_get_student",
+      "source": "app_api_students_py",
+      "target": "api_students_get_student"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/students.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "app_api_students_py",
+      "_tgt": "api_students_upload_images",
+      "source": "app_api_students_py",
+      "target": "api_students_upload_images"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/students.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_src": "app_api_students_py",
+      "_tgt": "api_students_delete_student",
+      "source": "app_api_students_py",
+      "target": "api_students_delete_student"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/students.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "api_students_rationale_13",
+      "_tgt": "api_students_register_student",
+      "source": "api_students_register_student",
+      "target": "api_students_rationale_13"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/students.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_src": "api_students_rationale_23",
+      "_tgt": "api_students_list_students",
+      "source": "api_students_list_students",
+      "target": "api_students_rationale_23"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/students.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_src": "api_students_rationale_29",
+      "_tgt": "api_students_get_student",
+      "source": "api_students_get_student",
+      "target": "api_students_rationale_29"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/students.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_src": "api_students_rationale_42",
+      "_tgt": "api_students_upload_images",
+      "source": "api_students_upload_images",
+      "target": "api_students_rationale_42"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/api/students.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_src": "api_students_rationale_53",
+      "_tgt": "api_students_delete_student",
+      "source": "api_students_delete_student",
+      "target": "api_students_rationale_53"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/core/config.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "app_core_config_py",
+      "_tgt": "core_config_settings",
+      "source": "app_core_config_py",
+      "target": "core_config_settings"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/core/config.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "core_config_settings",
+      "_tgt": "basesettings",
+      "source": "core_config_settings",
+      "target": "basesettings"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/db/session.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "app_db_session_py",
+      "_tgt": "db_session_base",
+      "source": "app_db_session_py",
+      "target": "db_session_base"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/db/session.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_src": "app_db_session_py",
+      "_tgt": "db_session_get_db",
+      "source": "app_db_session_py",
+      "target": "db_session_get_db"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/db/session.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "db_session_base",
+      "_tgt": "declarativebase",
+      "source": "db_session_base",
+      "target": "declarativebase"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/models/models.py",
+      "source_location": "L4",
+      "weight": 0.8,
+      "_src": "models_models_student",
+      "_tgt": "db_session_base",
+      "source": "db_session_base",
+      "target": "models_models_student"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/models/models.py",
+      "source_location": "L4",
+      "weight": 0.8,
+      "_src": "models_models_embedding",
+      "_tgt": "db_session_base",
+      "source": "db_session_base",
+      "target": "models_models_embedding"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/models/models.py",
+      "source_location": "L4",
+      "weight": 0.8,
+      "_src": "models_models_attendance",
+      "_tgt": "db_session_base",
+      "source": "db_session_base",
+      "target": "models_models_attendance"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/models/models.py",
+      "source_location": "L4",
+      "weight": 0.8,
+      "_src": "models_models_admin",
+      "_tgt": "db_session_base",
+      "source": "db_session_base",
+      "target": "models_models_admin"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/models.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "app_models_models_py",
+      "_tgt": "sqlalchemy",
+      "source": "app_models_models_py",
+      "target": "sqlalchemy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/models.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "app_models_models_py",
+      "_tgt": "models_models_student",
+      "source": "app_models_models_py",
+      "target": "models_models_student"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/models.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_src": "app_models_models_py",
+      "_tgt": "models_models_embedding",
+      "source": "app_models_models_py",
+      "target": "models_models_embedding"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/models.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_src": "app_models_models_py",
+      "_tgt": "models_models_attendance",
+      "source": "app_models_models_py",
+      "target": "models_models_attendance"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/models.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_src": "app_models_models_py",
+      "_tgt": "models_models_admin",
+      "source": "app_models_models_py",
+      "target": "models_models_admin"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/models.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "models_models_student",
+      "_tgt": "base",
+      "source": "models_models_student",
+      "target": "base"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L9",
+      "weight": 0.8,
+      "_src": "services_ai_service_aiservice",
+      "_tgt": "models_models_student",
+      "source": "models_models_student",
+      "target": "services_ai_service_aiservice"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L4",
+      "weight": 0.8,
+      "_src": "services_attendance_service_attendanceservice",
+      "_tgt": "models_models_student",
+      "source": "models_models_student",
+      "target": "services_attendance_service_attendanceservice"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "services_classroom_recognition_service_classroomrecognitionservice",
+      "_tgt": "models_models_student",
+      "source": "models_models_student",
+      "target": "services_classroom_recognition_service_classroomrecognitionservice"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "models_models_student",
+      "source": "models_models_student",
+      "target": "services_student_service_studentservice"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/models.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_src": "models_models_embedding",
+      "_tgt": "base",
+      "source": "base",
+      "target": "models_models_embedding"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/models.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_src": "models_models_attendance",
+      "_tgt": "base",
+      "source": "base",
+      "target": "models_models_attendance"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/models/models.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_src": "models_models_admin",
+      "_tgt": "base",
+      "source": "base",
+      "target": "models_models_admin"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L9",
+      "weight": 0.8,
+      "_src": "services_ai_service_aiservice",
+      "_tgt": "models_models_embedding",
+      "source": "models_models_embedding",
+      "target": "services_ai_service_aiservice"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "_src": "services_classroom_recognition_service_classroomrecognitionservice",
+      "_tgt": "models_models_embedding",
+      "source": "models_models_embedding",
+      "target": "services_classroom_recognition_service_classroomrecognitionservice"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L169",
+      "weight": 0.8,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "models_models_embedding",
+      "source": "models_models_embedding",
+      "target": "services_student_service_studentservice"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L66",
+      "weight": 1.0,
+      "_src": "services_ai_service_aiservice_process_student_embeddings",
+      "_tgt": "models_models_embedding",
+      "source": "models_models_embedding",
+      "target": "services_ai_service_aiservice_process_student_embeddings"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L4",
+      "weight": 0.8,
+      "_src": "services_attendance_service_attendanceservice",
+      "_tgt": "models_models_attendance",
+      "source": "models_models_attendance",
+      "target": "services_attendance_service_attendanceservice"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L169",
+      "weight": 0.8,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "models_models_attendance",
+      "source": "models_models_attendance",
+      "target": "services_student_service_studentservice"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_src": "services_attendance_service_attendanceservice_mark_attendance",
+      "_tgt": "models_models_attendance",
+      "source": "models_models_attendance",
+      "target": "services_attendance_service_attendanceservice_mark_attendance"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "app_schemas_student_py",
+      "_tgt": "schemas_student_studentbase",
+      "source": "app_schemas_student_py",
+      "target": "schemas_student_studentbase"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "app_schemas_student_py",
+      "_tgt": "schemas_student_studentcreate",
+      "source": "app_schemas_student_py",
+      "target": "schemas_student_studentcreate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_src": "app_schemas_student_py",
+      "_tgt": "schemas_student_studentupdate",
+      "source": "app_schemas_student_py",
+      "target": "schemas_student_studentupdate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "app_schemas_student_py",
+      "_tgt": "schemas_student_studentresponse",
+      "source": "app_schemas_student_py",
+      "target": "schemas_student_studentresponse"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_src": "app_schemas_student_py",
+      "_tgt": "schemas_student_studentimageresponse",
+      "source": "app_schemas_student_py",
+      "target": "schemas_student_studentimageresponse"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "schemas_student_studentbase",
+      "_tgt": "basemodel",
+      "source": "schemas_student_studentbase",
+      "target": "basemodel"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "schemas_student_studentcreate",
+      "_tgt": "schemas_student_studentbase",
+      "source": "schemas_student_studentbase",
+      "target": "schemas_student_studentcreate"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "schemas_student_studentresponse",
+      "_tgt": "schemas_student_studentbase",
+      "source": "schemas_student_studentbase",
+      "target": "schemas_student_studentresponse"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_src": "schemas_student_studentupdate",
+      "_tgt": "basemodel",
+      "source": "basemodel",
+      "target": "schemas_student_studentupdate"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "app/schemas/student.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_src": "schemas_student_studentimageresponse",
+      "_tgt": "basemodel",
+      "source": "basemodel",
+      "target": "schemas_student_studentimageresponse"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L13",
+      "weight": 0.8,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "schemas_student_studentcreate",
+      "source": "schemas_student_studentcreate",
+      "target": "services_student_service_studentservice"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L13",
+      "weight": 0.8,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "schemas_student_studentresponse",
+      "source": "schemas_student_studentresponse",
+      "target": "services_student_service_studentservice"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/services/student_service.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice_build_student_response",
+      "_tgt": "schemas_student_studentresponse",
+      "source": "schemas_student_studentresponse",
+      "target": "services_student_service_studentservice_build_student_response"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L13",
+      "weight": 0.8,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "schemas_student_studentimageresponse",
+      "source": "schemas_student_studentimageresponse",
+      "target": "services_student_service_studentservice"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/services/student_service.py",
+      "source_location": "L142",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice_upload_student_images",
+      "_tgt": "schemas_student_studentimageresponse",
+      "source": "schemas_student_studentimageresponse",
+      "target": "services_student_service_studentservice_upload_student_images"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "app_services_ai_service_py",
+      "_tgt": "fastapi",
+      "source": "app_services_ai_service_py",
+      "target": "fastapi"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_src": "app_services_ai_service_py",
+      "_tgt": "services_ai_service_aiservice",
+      "source": "app_services_ai_service_py",
+      "target": "services_ai_service_aiservice"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_src": "services_ai_service_aiservice",
+      "_tgt": "services_ai_service_aiservice_init",
+      "source": "services_ai_service_aiservice",
+      "target": "services_ai_service_aiservice_init"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_src": "services_ai_service_aiservice",
+      "_tgt": "services_ai_service_aiservice_process_student_embeddings",
+      "source": "services_ai_service_aiservice",
+      "target": "services_ai_service_aiservice_process_student_embeddings"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_src": "services_ai_service_rationale_15",
+      "_tgt": "services_ai_service_aiservice",
+      "source": "services_ai_service_aiservice",
+      "target": "services_ai_service_rationale_15"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/ai_service.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_src": "services_ai_service_rationale_28",
+      "_tgt": "services_ai_service_aiservice_process_student_embeddings",
+      "source": "services_ai_service_aiservice_process_student_embeddings",
+      "target": "services_ai_service_rationale_28"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "app_services_attendance_service_py",
+      "_tgt": "sqlalchemy",
+      "source": "app_services_attendance_service_py",
+      "target": "sqlalchemy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "app_services_attendance_service_py",
+      "_tgt": "services_attendance_service_attendanceservice",
+      "source": "app_services_attendance_service_py",
+      "target": "services_attendance_service_attendanceservice"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_src": "services_attendance_service_attendanceservice",
+      "_tgt": "services_attendance_service_attendanceservice_init",
+      "source": "services_attendance_service_attendanceservice",
+      "target": "services_attendance_service_attendanceservice_init"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "services_attendance_service_attendanceservice",
+      "_tgt": "services_attendance_service_attendanceservice_mark_attendance",
+      "source": "services_attendance_service_attendanceservice",
+      "target": "services_attendance_service_attendanceservice_mark_attendance"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_src": "services_attendance_service_attendanceservice",
+      "_tgt": "services_attendance_service_attendanceservice_get_attendance_report",
+      "source": "services_attendance_service_attendanceservice",
+      "target": "services_attendance_service_attendanceservice_get_attendance_report"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L83",
+      "weight": 1.0,
+      "_src": "services_attendance_service_attendanceservice",
+      "_tgt": "services_attendance_service_attendanceservice_get_student_history",
+      "source": "services_attendance_service_attendanceservice",
+      "target": "services_attendance_service_attendanceservice_get_student_history"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_src": "services_attendance_service_rationale_11",
+      "_tgt": "services_attendance_service_attendanceservice_mark_attendance",
+      "source": "services_attendance_service_attendanceservice_mark_attendance",
+      "target": "services_attendance_service_rationale_11"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_src": "services_attendance_service_rationale_49",
+      "_tgt": "services_attendance_service_attendanceservice_get_attendance_report",
+      "source": "services_attendance_service_attendanceservice_get_attendance_report",
+      "target": "services_attendance_service_rationale_49"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/attendance_service.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_src": "services_attendance_service_rationale_84",
+      "_tgt": "services_attendance_service_attendanceservice_get_student_history",
+      "source": "services_attendance_service_attendanceservice_get_student_history",
+      "target": "services_attendance_service_rationale_84"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_src": "app_services_classroom_recognition_service_py",
+      "_tgt": "fastapi",
+      "source": "app_services_classroom_recognition_service_py",
+      "target": "fastapi"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "app_services_classroom_recognition_service_py",
+      "_tgt": "services_classroom_recognition_service_classroomrecognitionservice",
+      "source": "app_services_classroom_recognition_service_py",
+      "target": "services_classroom_recognition_service_classroomrecognitionservice"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_src": "services_classroom_recognition_service_classroomrecognitionservice",
+      "_tgt": "services_classroom_recognition_service_classroomrecognitionservice_init",
+      "source": "services_classroom_recognition_service_classroomrecognitionservice",
+      "target": "services_classroom_recognition_service_classroomrecognitionservice_init"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_src": "services_classroom_recognition_service_classroomrecognitionservice",
+      "_tgt": "services_classroom_recognition_service_classroomrecognitionservice_recognize_classroom",
+      "source": "services_classroom_recognition_service_classroomrecognitionservice",
+      "target": "services_classroom_recognition_service_classroomrecognitionservice_recognize_classroom"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "services_classroom_recognition_service_rationale_18",
+      "_tgt": "services_classroom_recognition_service_classroomrecognitionservice",
+      "source": "services_classroom_recognition_service_classroomrecognitionservice",
+      "target": "services_classroom_recognition_service_rationale_18"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L14",
+      "weight": 0.8,
+      "_src": "services_classroom_recognition_service_classroomrecognitionservice",
+      "_tgt": "services_similarity_service_similarityservice",
+      "source": "services_classroom_recognition_service_classroomrecognitionservice",
+      "target": "services_similarity_service_similarityservice"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app/services/classroom_recognition_service.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_src": "services_classroom_recognition_service_classroomrecognitionservice_init",
+      "_tgt": "services_similarity_service_similarityservice",
+      "source": "services_classroom_recognition_service_classroomrecognitionservice_init",
+      "target": "services_similarity_service_similarityservice"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "app_services_similarity_service_py",
+      "_tgt": "services_similarity_service_similarityservice",
+      "source": "app_services_similarity_service_py",
+      "target": "services_similarity_service_similarityservice"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_src": "services_similarity_service_similarityservice",
+      "_tgt": "services_similarity_service_similarityservice_init",
+      "source": "services_similarity_service_similarityservice",
+      "target": "services_similarity_service_similarityservice_init"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "services_similarity_service_similarityservice",
+      "_tgt": "services_similarity_service_similarityservice_calculate_cosine_similarity",
+      "source": "services_similarity_service_similarityservice",
+      "target": "services_similarity_service_similarityservice_calculate_cosine_similarity"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_src": "services_similarity_service_similarityservice",
+      "_tgt": "services_similarity_service_similarityservice_find_best_match",
+      "source": "services_similarity_service_similarityservice",
+      "target": "services_similarity_service_similarityservice_find_best_match"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "services_similarity_service_rationale_6",
+      "_tgt": "services_similarity_service_similarityservice",
+      "source": "services_similarity_service_similarityservice",
+      "target": "services_similarity_service_rationale_6"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_src": "services_similarity_service_similarityservice_find_best_match",
+      "_tgt": "services_similarity_service_similarityservice_calculate_cosine_similarity",
+      "source": "services_similarity_service_similarityservice_calculate_cosine_similarity",
+      "target": "services_similarity_service_similarityservice_find_best_match"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "services_similarity_service_rationale_13",
+      "_tgt": "services_similarity_service_similarityservice_calculate_cosine_similarity",
+      "source": "services_similarity_service_similarityservice_calculate_cosine_similarity",
+      "target": "services_similarity_service_rationale_13"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/similarity_service.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_src": "services_similarity_service_rationale_31",
+      "_tgt": "services_similarity_service_similarityservice_find_best_match",
+      "source": "services_similarity_service_similarityservice_find_best_match",
+      "target": "services_similarity_service_rationale_31"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "app_services_student_service_py",
+      "_tgt": "fastapi",
+      "source": "app_services_student_service_py",
+      "target": "fastapi"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "app_services_student_service_py",
+      "_tgt": "sqlalchemy",
+      "source": "app_services_student_service_py",
+      "target": "sqlalchemy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "app_services_student_service_py",
+      "_tgt": "services_student_service_studentservice",
+      "source": "app_services_student_service_py",
+      "target": "services_student_service_studentservice"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "services_student_service_studentservice_init",
+      "source": "services_student_service_studentservice",
+      "target": "services_student_service_studentservice_init"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "services_student_service_studentservice_count_uploaded_images",
+      "source": "services_student_service_studentservice",
+      "target": "services_student_service_studentservice_count_uploaded_images"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "services_student_service_studentservice_count_embeddings",
+      "source": "services_student_service_studentservice",
+      "target": "services_student_service_studentservice_count_embeddings"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "services_student_service_studentservice_build_student_response",
+      "source": "services_student_service_studentservice",
+      "target": "services_student_service_studentservice_build_student_response"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "services_student_service_studentservice_create_student",
+      "source": "services_student_service_studentservice",
+      "target": "services_student_service_studentservice_create_student"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "services_student_service_studentservice_get_student",
+      "source": "services_student_service_studentservice",
+      "target": "services_student_service_studentservice_get_student"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L83",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "services_student_service_studentservice_list_students",
+      "source": "services_student_service_studentservice",
+      "target": "services_student_service_studentservice_list_students"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "services_student_service_studentservice_get_student_response",
+      "source": "services_student_service_studentservice",
+      "target": "services_student_service_studentservice_get_student_response"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L94",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "services_student_service_studentservice_upload_student_images",
+      "source": "services_student_service_studentservice",
+      "target": "services_student_service_studentservice_upload_student_images"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L149",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice",
+      "_tgt": "services_student_service_studentservice_delete_student",
+      "source": "services_student_service_studentservice",
+      "target": "services_student_service_studentservice_delete_student"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice_build_student_response",
+      "_tgt": "services_student_service_studentservice_count_uploaded_images",
+      "source": "services_student_service_studentservice_count_uploaded_images",
+      "target": "services_student_service_studentservice_build_student_response"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice_build_student_response",
+      "_tgt": "services_student_service_studentservice_count_embeddings",
+      "source": "services_student_service_studentservice_count_embeddings",
+      "target": "services_student_service_studentservice_build_student_response"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice_create_student",
+      "_tgt": "services_student_service_studentservice_build_student_response",
+      "source": "services_student_service_studentservice_build_student_response",
+      "target": "services_student_service_studentservice_create_student"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice_list_students",
+      "_tgt": "services_student_service_studentservice_build_student_response",
+      "source": "services_student_service_studentservice_build_student_response",
+      "target": "services_student_service_studentservice_list_students"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice_get_student_response",
+      "_tgt": "services_student_service_studentservice_build_student_response",
+      "source": "services_student_service_studentservice_build_student_response",
+      "target": "services_student_service_studentservice_get_student_response"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice_get_student_response",
+      "_tgt": "services_student_service_studentservice_get_student",
+      "source": "services_student_service_studentservice_get_student",
+      "target": "services_student_service_studentservice_get_student_response"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice_upload_student_images",
+      "_tgt": "services_student_service_studentservice_get_student",
+      "source": "services_student_service_studentservice_get_student",
+      "target": "services_student_service_studentservice_upload_student_images"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L155",
+      "weight": 1.0,
+      "_src": "services_student_service_studentservice_delete_student",
+      "_tgt": "services_student_service_studentservice_get_student",
+      "source": "services_student_service_studentservice_get_student",
+      "target": "services_student_service_studentservice_delete_student"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app/services/student_service.py",
+      "source_location": "L150",
+      "weight": 1.0,
+      "_src": "services_student_service_rationale_150",
+      "_tgt": "services_student_service_studentservice_delete_student",
+      "source": "services_student_service_studentservice_delete_student",
+      "target": "services_student_service_rationale_150"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/vite.config.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "frontend_vite_config_ts",
+      "_tgt": "vite",
+      "source": "frontend_vite_config_ts",
+      "target": "vite"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "frontend_src_app_tsx",
+      "_tgt": "react",
+      "source": "frontend_src_app_tsx",
+      "target": "react"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_src": "frontend_src_app_tsx",
+      "_tgt": "frontend_src_components_layout_dashboardlayout_tsx",
+      "source": "frontend_src_app_tsx",
+      "target": "frontend_src_components_layout_dashboardlayout_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "frontend_src_app_tsx",
+      "_tgt": "frontend_src_pages_students_studentspage_tsx",
+      "source": "frontend_src_app_tsx",
+      "target": "frontend_src_pages_students_studentspage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "frontend_src_app_tsx",
+      "_tgt": "frontend_src_pages_markattendance_markattendancepage_tsx",
+      "source": "frontend_src_app_tsx",
+      "target": "frontend_src_pages_markattendance_markattendancepage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "frontend_src_app_tsx",
+      "_tgt": "frontend_src_pages_reports_reportspage_tsx",
+      "source": "frontend_src_app_tsx",
+      "target": "frontend_src_pages_reports_reportspage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "frontend_src_app_tsx",
+      "_tgt": "frontend_src_pages_analytics_analyticspage_tsx",
+      "source": "frontend_src_app_tsx",
+      "target": "frontend_src_pages_analytics_analyticspage_tsx"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_src": "frontend_src_app_tsx",
+      "_tgt": "src_app_app",
+      "source": "frontend_src_app_tsx",
+      "target": "src_app_app"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "frontend_src_main_tsx",
+      "_tgt": "frontend_src_app_tsx",
+      "source": "frontend_src_app_tsx",
+      "target": "frontend_src_main_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/main.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "frontend_src_main_tsx",
+      "_tgt": "react",
+      "source": "frontend_src_main_tsx",
+      "target": "react"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api/client.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "frontend_src_api_client_ts",
+      "_tgt": "api_client_student",
+      "source": "frontend_src_api_client_ts",
+      "target": "api_client_student"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api/client.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "frontend_src_api_client_ts",
+      "_tgt": "api_client_studentcreateinput",
+      "source": "frontend_src_api_client_ts",
+      "target": "api_client_studentcreateinput"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api/client.ts",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_src": "frontend_src_api_client_ts",
+      "_tgt": "api_client_apiclient",
+      "source": "frontend_src_api_client_ts",
+      "target": "api_client_apiclient"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/api/client.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_src": "frontend_src_api_client_ts",
+      "_tgt": "api_client_studentservice",
+      "source": "frontend_src_api_client_ts",
+      "target": "api_client_studentservice"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Analytics/AnalyticsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_analytics_analyticspage_tsx",
+      "_tgt": "frontend_src_api_client_ts",
+      "source": "frontend_src_api_client_ts",
+      "target": "frontend_src_pages_analytics_analyticspage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/MarkAttendance/MarkAttendancePage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_markattendance_markattendancepage_tsx",
+      "_tgt": "frontend_src_api_client_ts",
+      "source": "frontend_src_api_client_ts",
+      "target": "frontend_src_pages_markattendance_markattendancepage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Reports/ReportsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_reports_reportspage_tsx",
+      "_tgt": "frontend_src_api_client_ts",
+      "source": "frontend_src_api_client_ts",
+      "target": "frontend_src_pages_reports_reportspage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Students/StudentsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_students_studentspage_tsx",
+      "_tgt": "frontend_src_api_client_ts",
+      "source": "frontend_src_api_client_ts",
+      "target": "frontend_src_pages_students_studentspage_tsx"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Students/StudentsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_students_studentspage_tsx",
+      "_tgt": "api_client_student",
+      "source": "api_client_student",
+      "target": "frontend_src_pages_students_studentspage_tsx"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Students/StudentsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_students_studentspage_tsx",
+      "_tgt": "api_client_studentcreateinput",
+      "source": "api_client_studentcreateinput",
+      "target": "frontend_src_pages_students_studentspage_tsx"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Reports/ReportsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_reports_reportspage_tsx",
+      "_tgt": "api_client_studentservice",
+      "source": "api_client_studentservice",
+      "target": "frontend_src_pages_reports_reportspage_tsx"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Students/StudentsPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_students_studentspage_tsx",
+      "_tgt": "api_client_studentservice",
+      "source": "api_client_studentservice",
+      "target": "frontend_src_pages_students_studentspage_tsx"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/common/ThemeToggle.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "frontend_src_components_common_themetoggle_tsx",
+      "_tgt": "react",
+      "source": "frontend_src_components_common_themetoggle_tsx",
+      "target": "react"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/common/ThemeToggle.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "frontend_src_components_common_themetoggle_tsx",
+      "_tgt": "frontend_src_store_themestore_ts",
+      "source": "frontend_src_components_common_themetoggle_tsx",
+      "target": "frontend_src_store_themestore_ts"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/common/ThemeToggle.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "frontend_src_components_common_themetoggle_tsx",
+      "_tgt": "store_themestore_usethemestore",
+      "source": "frontend_src_components_common_themetoggle_tsx",
+      "target": "store_themestore_usethemestore"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/common/ThemeToggle.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "frontend_src_components_common_themetoggle_tsx",
+      "_tgt": "common_themetoggle_themetoggle",
+      "source": "frontend_src_components_common_themetoggle_tsx",
+      "target": "common_themetoggle_themetoggle"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/layout/DashboardLayout.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_src": "frontend_src_components_layout_dashboardlayout_tsx",
+      "_tgt": "frontend_src_components_common_themetoggle_tsx",
+      "source": "frontend_src_components_common_themetoggle_tsx",
+      "target": "frontend_src_components_layout_dashboardlayout_tsx"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "frontend/src/components/common/ThemeToggle.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "common_themetoggle_themetoggle",
+      "_tgt": "store_themestore_usethemestore",
+      "source": "common_themetoggle_themetoggle",
+      "target": "store_themestore_usethemestore"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/layout/DashboardLayout.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "frontend_src_components_layout_dashboardlayout_tsx",
+      "_tgt": "react",
+      "source": "frontend_src_components_layout_dashboardlayout_tsx",
+      "target": "react"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/layout/DashboardLayout.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "frontend_src_components_layout_dashboardlayout_tsx",
+      "_tgt": "layout_dashboardlayout_sidebaritemprops",
+      "source": "frontend_src_components_layout_dashboardlayout_tsx",
+      "target": "layout_dashboardlayout_sidebaritemprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/layout/DashboardLayout.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "frontend_src_components_layout_dashboardlayout_tsx",
+      "_tgt": "layout_dashboardlayout_sidebaritem",
+      "source": "frontend_src_components_layout_dashboardlayout_tsx",
+      "target": "layout_dashboardlayout_sidebaritem"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/components/layout/DashboardLayout.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_src": "frontend_src_components_layout_dashboardlayout_tsx",
+      "_tgt": "layout_dashboardlayout_dashboardlayout",
+      "source": "frontend_src_components_layout_dashboardlayout_tsx",
+      "target": "layout_dashboardlayout_dashboardlayout"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Analytics/AnalyticsPage.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_analytics_analyticspage_tsx",
+      "_tgt": "react",
+      "source": "frontend_src_pages_analytics_analyticspage_tsx",
+      "target": "react"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Analytics/AnalyticsPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_analytics_analyticspage_tsx",
+      "_tgt": "analytics_analyticspage_analyticsentry",
+      "source": "frontend_src_pages_analytics_analyticspage_tsx",
+      "target": "analytics_analyticspage_analyticsentry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Analytics/AnalyticsPage.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_analytics_analyticspage_tsx",
+      "_tgt": "analytics_analyticspage_analyticspage",
+      "source": "frontend_src_pages_analytics_analyticspage_tsx",
+      "target": "analytics_analyticspage_analyticspage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/MarkAttendance/MarkAttendancePage.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_markattendance_markattendancepage_tsx",
+      "_tgt": "react",
+      "source": "frontend_src_pages_markattendance_markattendancepage_tsx",
+      "target": "react"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/MarkAttendance/MarkAttendancePage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_markattendance_markattendancepage_tsx",
+      "_tgt": "markattendance_markattendancepage_recognitionresult",
+      "source": "frontend_src_pages_markattendance_markattendancepage_tsx",
+      "target": "markattendance_markattendancepage_recognitionresult"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/MarkAttendance/MarkAttendancePage.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_markattendance_markattendancepage_tsx",
+      "_tgt": "markattendance_markattendancepage_attendancesession",
+      "source": "frontend_src_pages_markattendance_markattendancepage_tsx",
+      "target": "markattendance_markattendancepage_attendancesession"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/MarkAttendance/MarkAttendancePage.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_markattendance_markattendancepage_tsx",
+      "_tgt": "markattendance_markattendancepage_attendancemarkresponse",
+      "source": "frontend_src_pages_markattendance_markattendancepage_tsx",
+      "target": "markattendance_markattendancepage_attendancemarkresponse"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/MarkAttendance/MarkAttendancePage.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_markattendance_markattendancepage_tsx",
+      "_tgt": "markattendance_markattendancepage_markattendancepage",
+      "source": "frontend_src_pages_markattendance_markattendancepage_tsx",
+      "target": "markattendance_markattendancepage_markattendancepage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Reports/ReportsPage.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_reports_reportspage_tsx",
+      "_tgt": "react",
+      "source": "frontend_src_pages_reports_reportspage_tsx",
+      "target": "react"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Reports/ReportsPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_reports_reportspage_tsx",
+      "_tgt": "reports_reportspage_reportentry",
+      "source": "frontend_src_pages_reports_reportspage_tsx",
+      "target": "reports_reportspage_reportentry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Reports/ReportsPage.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_reports_reportspage_tsx",
+      "_tgt": "reports_reportspage_attendancereportresponse",
+      "source": "frontend_src_pages_reports_reportspage_tsx",
+      "target": "reports_reportspage_attendancereportresponse"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Reports/ReportsPage.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_reports_reportspage_tsx",
+      "_tgt": "reports_reportspage_isvalidisodate",
+      "source": "frontend_src_pages_reports_reportspage_tsx",
+      "target": "reports_reportspage_isvalidisodate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Reports/ReportsPage.tsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_reports_reportspage_tsx",
+      "_tgt": "reports_reportspage_reportspage",
+      "source": "frontend_src_pages_reports_reportspage_tsx",
+      "target": "reports_reportspage_reportspage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Students/StudentsPage.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_students_studentspage_tsx",
+      "_tgt": "react",
+      "source": "frontend_src_pages_students_studentspage_tsx",
+      "target": "react"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Students/StudentsPage.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_students_studentspage_tsx",
+      "_tgt": "students_studentspage_statusmessage",
+      "source": "frontend_src_pages_students_studentspage_tsx",
+      "target": "students_studentspage_statusmessage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Students/StudentsPage.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_students_studentspage_tsx",
+      "_tgt": "students_studentspage_geterrormessage",
+      "source": "frontend_src_pages_students_studentspage_tsx",
+      "target": "students_studentspage_geterrormessage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/pages/Students/StudentsPage.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "frontend_src_pages_students_studentspage_tsx",
+      "_tgt": "students_studentspage_studentspage",
+      "source": "frontend_src_pages_students_studentspage_tsx",
+      "target": "students_studentspage_studentspage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/store/themeStore.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "frontend_src_store_themestore_ts",
+      "_tgt": "zustand",
+      "source": "frontend_src_store_themestore_ts",
+      "target": "zustand"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/store/themeStore.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_src": "frontend_src_store_themestore_ts",
+      "_tgt": "store_themestore_themestate",
+      "source": "frontend_src_store_themestore_ts",
+      "target": "store_themestore_themestate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/store/themeStore.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "frontend_src_store_themestore_ts",
+      "_tgt": "store_themestore_usethemestore",
+      "source": "frontend_src_store_themestore_ts",
+      "target": "store_themestore_usethemestore"
+    },
+    {
+      "relation": "instantiates",
+      "confidence": "EXTRACTED",
+      "_src": "app",
+      "_tgt": "FastAPI",
+      "source": "FastAPI",
+      "target": "app"
+    },
+    {
+      "relation": "includes_router",
+      "confidence": "EXTRACTED",
+      "_src": "app",
+      "_tgt": "health_router",
+      "source": "app",
+      "target": "health_router"
+    },
+    {
+      "relation": "includes_router",
+      "confidence": "EXTRACTED",
+      "_src": "app",
+      "_tgt": "student_router",
+      "source": "app",
+      "target": "student_router"
+    },
+    {
+      "relation": "includes_router",
+      "confidence": "EXTRACTED",
+      "_src": "app",
+      "_tgt": "ai_router",
+      "source": "app",
+      "target": "ai_router"
+    },
+    {
+      "relation": "includes_router",
+      "confidence": "EXTRACTED",
+      "_src": "app",
+      "_tgt": "recognition_router",
+      "source": "app",
+      "target": "recognition_router"
+    },
+    {
+      "relation": "includes_router",
+      "confidence": "EXTRACTED",
+      "_src": "app",
+      "_tgt": "attendance_router",
+      "source": "app",
+      "target": "attendance_router"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "app",
+      "_tgt": "Settings",
+      "source": "app",
+      "target": "Settings"
+    },
+    {
+      "relation": "belongs_to",
+      "confidence": "EXTRACTED",
+      "_src": "Embedding",
+      "_tgt": "Student",
+      "source": "Student",
+      "target": "Embedding"
+    },
+    {
+      "relation": "belongs_to",
+      "confidence": "EXTRACTED",
+      "_src": "Attendance",
+      "_tgt": "Student",
+      "source": "Student",
+      "target": "Attendance"
+    },
+    {
+      "relation": "manages",
+      "confidence": "EXTRACTED",
+      "_src": "StudentService",
+      "_tgt": "Student",
+      "source": "Student",
+      "target": "StudentService"
+    },
+    {
+      "relation": "queries",
+      "confidence": "EXTRACTED",
+      "_src": "AIService",
+      "_tgt": "Student",
+      "source": "Student",
+      "target": "AIService"
+    },
+    {
+      "relation": "queries",
+      "confidence": "EXTRACTED",
+      "_src": "AttendanceService",
+      "_tgt": "Student",
+      "source": "Student",
+      "target": "AttendanceService"
+    },
+    {
+      "relation": "queries",
+      "confidence": "EXTRACTED",
+      "_src": "ClassroomRecognitionService",
+      "_tgt": "Student",
+      "source": "Student",
+      "target": "ClassroomRecognitionService"
+    },
+    {
+      "relation": "declares",
+      "confidence": "EXTRACTED",
+      "_src": "Base",
+      "_tgt": "Student",
+      "source": "Student",
+      "target": "Base"
+    },
+    {
+      "relation": "manages",
+      "confidence": "EXTRACTED",
+      "_src": "StudentService",
+      "_tgt": "Embedding",
+      "source": "Embedding",
+      "target": "StudentService"
+    },
+    {
+      "relation": "creates",
+      "confidence": "EXTRACTED",
+      "_src": "AIService",
+      "_tgt": "Embedding",
+      "source": "Embedding",
+      "target": "AIService"
+    },
+    {
+      "relation": "queries",
+      "confidence": "EXTRACTED",
+      "_src": "ClassroomRecognitionService",
+      "_tgt": "Embedding",
+      "source": "Embedding",
+      "target": "ClassroomRecognitionService"
+    },
+    {
+      "relation": "compares",
+      "confidence": "EXTRACTED",
+      "_src": "SimilarityService",
+      "_tgt": "Embedding",
+      "source": "Embedding",
+      "target": "SimilarityService"
+    },
+    {
+      "relation": "declares",
+      "confidence": "EXTRACTED",
+      "_src": "Base",
+      "_tgt": "Embedding",
+      "source": "Embedding",
+      "target": "Base"
+    },
+    {
+      "relation": "manages",
+      "confidence": "EXTRACTED",
+      "_src": "AttendanceService",
+      "_tgt": "Attendance",
+      "source": "Attendance",
+      "target": "AttendanceService"
+    },
+    {
+      "relation": "declares",
+      "confidence": "EXTRACTED",
+      "_src": "Base",
+      "_tgt": "Attendance",
+      "source": "Attendance",
+      "target": "Base"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "RecognitionPipeline",
+      "_tgt": "FaceDetector",
+      "source": "FaceDetector",
+      "target": "RecognitionPipeline"
+    },
+    {
+      "relation": "wraps",
+      "confidence": "EXTRACTED",
+      "_src": "FaceDetector",
+      "_tgt": "InsightFace",
+      "source": "FaceDetector",
+      "target": "InsightFace"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "RecognitionPipeline",
+      "_tgt": "FaceRecognizer",
+      "source": "FaceRecognizer",
+      "target": "RecognitionPipeline"
+    },
+    {
+      "relation": "wraps",
+      "confidence": "EXTRACTED",
+      "_src": "FaceRecognizer",
+      "_tgt": "InsightFace",
+      "source": "FaceRecognizer",
+      "target": "InsightFace"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "AIService",
+      "_tgt": "RecognitionPipeline",
+      "source": "RecognitionPipeline",
+      "target": "AIService"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "ClassroomRecognitionService",
+      "_tgt": "RecognitionPipeline",
+      "source": "RecognitionPipeline",
+      "target": "ClassroomRecognitionService"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "student_router",
+      "_tgt": "StudentService",
+      "source": "StudentService",
+      "target": "student_router"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "StudentService",
+      "_tgt": "AsyncSession",
+      "source": "StudentService",
+      "target": "AsyncSession"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "ai_router",
+      "_tgt": "AIService",
+      "source": "AIService",
+      "target": "ai_router"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "AIService",
+      "_tgt": "AsyncSession",
+      "source": "AIService",
+      "target": "AsyncSession"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "attendance_router",
+      "_tgt": "AttendanceService",
+      "source": "AttendanceService",
+      "target": "attendance_router"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "AttendanceService",
+      "_tgt": "AsyncSession",
+      "source": "AttendanceService",
+      "target": "AsyncSession"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "ClassroomRecognitionService",
+      "_tgt": "SimilarityService",
+      "source": "ClassroomRecognitionService",
+      "target": "SimilarityService"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "attendance_router",
+      "_tgt": "ClassroomRecognitionService",
+      "source": "ClassroomRecognitionService",
+      "target": "attendance_router"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "recognition_router",
+      "_tgt": "ClassroomRecognitionService",
+      "source": "ClassroomRecognitionService",
+      "target": "recognition_router"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "ClassroomRecognitionService",
+      "_tgt": "AsyncSession",
+      "source": "ClassroomRecognitionService",
+      "target": "AsyncSession"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "attendance_router",
+      "_tgt": "SimilarityService",
+      "source": "SimilarityService",
+      "target": "attendance_router"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "health_router",
+      "_tgt": "AsyncSession",
+      "source": "health_router",
+      "target": "AsyncSession"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "student_router",
+      "_tgt": "StudentCreate",
+      "source": "student_router",
+      "target": "StudentCreate"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "student_router",
+      "_tgt": "StudentResponse",
+      "source": "student_router",
+      "target": "StudentResponse"
+    },
+    {
+      "relation": "declares",
+      "confidence": "EXTRACTED",
+      "_src": "Base",
+      "_tgt": "Admin",
+      "source": "Admin",
+      "target": "Base"
+    },
+    {
+      "relation": "provides",
+      "confidence": "EXTRACTED",
+      "_src": "get_db",
+      "_tgt": "AsyncSession",
+      "source": "AsyncSession",
+      "target": "get_db"
+    },
+    {
+      "relation": "connects_to",
+      "confidence": "INFERRED",
+      "_src": "AsyncSession",
+      "_tgt": "PostgreSQL",
+      "source": "AsyncSession",
+      "target": "PostgreSQL"
+    },
+    {
+      "relation": "has user interface",
+      "confidence": "EXTRACTED",
+      "_src": "smartattend_platform",
+      "_tgt": "frontend_app",
+      "source": "smartattend_platform",
+      "target": "frontend_app"
+    },
+    {
+      "relation": "has backend service",
+      "confidence": "EXTRACTED",
+      "_src": "smartattend_platform",
+      "_tgt": "backend_system",
+      "source": "smartattend_platform",
+      "target": "backend_system"
+    },
+    {
+      "relation": "deployed with",
+      "confidence": "EXTRACTED",
+      "_src": "smartattend_platform",
+      "_tgt": "docker",
+      "source": "smartattend_platform",
+      "target": "docker"
+    },
+    {
+      "relation": "documents roadmap for",
+      "confidence": "EXTRACTED",
+      "_src": "improvement_plan_doc",
+      "_tgt": "smartattend_platform",
+      "source": "smartattend_platform",
+      "target": "improvement_plan_doc"
+    },
+    {
+      "relation": "describes",
+      "confidence": "EXTRACTED",
+      "_src": "readme_doc",
+      "_tgt": "smartattend_platform",
+      "source": "smartattend_platform",
+      "target": "readme_doc"
+    },
+    {
+      "relation": "built with",
+      "confidence": "EXTRACTED",
+      "_src": "frontend_app",
+      "_tgt": "react",
+      "source": "frontend_app",
+      "target": "react"
+    },
+    {
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "_src": "frontend_app",
+      "_tgt": "typescript",
+      "source": "frontend_app",
+      "target": "typescript"
+    },
+    {
+      "relation": "built with",
+      "confidence": "EXTRACTED",
+      "_src": "frontend_app",
+      "_tgt": "vite",
+      "source": "frontend_app",
+      "target": "vite"
+    },
+    {
+      "relation": "styled with",
+      "confidence": "EXTRACTED",
+      "_src": "frontend_app",
+      "_tgt": "tailwind",
+      "source": "frontend_app",
+      "target": "tailwind"
+    },
+    {
+      "relation": "manages state with",
+      "confidence": "EXTRACTED",
+      "_src": "frontend_app",
+      "_tgt": "zustand",
+      "source": "frontend_app",
+      "target": "zustand"
+    },
+    {
+      "relation": "has main layout component",
+      "confidence": "EXTRACTED",
+      "_src": "frontend_app",
+      "_tgt": "dashboard_layout",
+      "source": "frontend_app",
+      "target": "dashboard_layout"
+    },
+    {
+      "relation": "built with",
+      "confidence": "EXTRACTED",
+      "_src": "backend_system",
+      "_tgt": "fastapi",
+      "source": "backend_system",
+      "target": "fastapi"
+    },
+    {
+      "relation": "uses ORM",
+      "confidence": "EXTRACTED",
+      "_src": "backend_system",
+      "_tgt": "sqlalchemy",
+      "source": "backend_system",
+      "target": "sqlalchemy"
+    },
+    {
+      "relation": "persists data in",
+      "confidence": "EXTRACTED",
+      "_src": "backend_system",
+      "_tgt": "postgres",
+      "source": "backend_system",
+      "target": "postgres"
+    },
+    {
+      "relation": "uses for face detection",
+      "confidence": "EXTRACTED",
+      "_src": "backend_system",
+      "_tgt": "insightface",
+      "source": "backend_system",
+      "target": "insightface"
+    },
+    {
+      "relation": "uses for image processing",
+      "confidence": "EXTRACTED",
+      "_src": "backend_system",
+      "_tgt": "opencv",
+      "source": "backend_system",
+      "target": "opencv"
+    },
+    {
+      "relation": "orchestrates service",
+      "confidence": "EXTRACTED",
+      "_src": "docker_compose",
+      "_tgt": "backend_system",
+      "source": "backend_system",
+      "target": "docker_compose"
+    },
+    {
+      "relation": "configures plugin for",
+      "confidence": "EXTRACTED",
+      "_src": "vite_config",
+      "_tgt": "react",
+      "source": "react",
+      "target": "vite_config"
+    },
+    {
+      "relation": "configures",
+      "confidence": "EXTRACTED",
+      "_src": "tailwind_config",
+      "_tgt": "tailwind",
+      "source": "tailwind",
+      "target": "tailwind_config"
+    },
+    {
+      "relation": "specifies dependency",
+      "confidence": "EXTRACTED",
+      "_src": "requirements",
+      "_tgt": "fastapi",
+      "source": "fastapi",
+      "target": "requirements"
+    },
+    {
+      "relation": "specifies dependency",
+      "confidence": "EXTRACTED",
+      "_src": "requirements",
+      "_tgt": "sqlalchemy",
+      "source": "sqlalchemy",
+      "target": "requirements"
+    },
+    {
+      "relation": "orchestrates service",
+      "confidence": "EXTRACTED",
+      "_src": "docker_compose",
+      "_tgt": "postgres",
+      "source": "postgres",
+      "target": "docker_compose"
+    },
+    {
+      "relation": "powered by",
+      "confidence": "EXTRACTED",
+      "_src": "face_recognition",
+      "_tgt": "insightface",
+      "source": "insightface",
+      "target": "face_recognition"
+    },
+    {
+      "relation": "specifies dependency",
+      "confidence": "EXTRACTED",
+      "_src": "requirements",
+      "_tgt": "insightface",
+      "source": "insightface",
+      "target": "requirements"
+    },
+    {
+      "relation": "specifies dependency",
+      "confidence": "EXTRACTED",
+      "_src": "requirements",
+      "_tgt": "opencv",
+      "source": "opencv",
+      "target": "requirements"
+    },
+    {
+      "relation": "routes to",
+      "confidence": "EXTRACTED",
+      "_src": "dashboard_layout",
+      "_tgt": "students_page",
+      "source": "dashboard_layout",
+      "target": "students_page"
+    },
+    {
+      "relation": "routes to",
+      "confidence": "EXTRACTED",
+      "_src": "dashboard_layout",
+      "_tgt": "mark_attendance_page",
+      "source": "dashboard_layout",
+      "target": "mark_attendance_page"
+    },
+    {
+      "relation": "routes to",
+      "confidence": "EXTRACTED",
+      "_src": "dashboard_layout",
+      "_tgt": "reports_page",
+      "source": "dashboard_layout",
+      "target": "reports_page"
+    },
+    {
+      "relation": "routes to",
+      "confidence": "EXTRACTED",
+      "_src": "dashboard_layout",
+      "_tgt": "analytics_page",
+      "source": "dashboard_layout",
+      "target": "analytics_page"
+    },
+    {
+      "relation": "contains component",
+      "confidence": "EXTRACTED",
+      "_src": "dashboard_layout",
+      "_tgt": "theme_toggle",
+      "source": "dashboard_layout",
+      "target": "theme_toggle"
+    },
+    {
+      "relation": "communicates via",
+      "confidence": "EXTRACTED",
+      "_src": "students_page",
+      "_tgt": "api_client",
+      "source": "students_page",
+      "target": "api_client"
+    },
+    {
+      "relation": "manages",
+      "confidence": "EXTRACTED",
+      "_src": "students_page",
+      "_tgt": "student_interface",
+      "source": "students_page",
+      "target": "student_interface"
+    },
+    {
+      "relation": "triggers",
+      "confidence": "EXTRACTED",
+      "_src": "students_page",
+      "_tgt": "embedding_generation",
+      "source": "students_page",
+      "target": "embedding_generation"
+    },
+    {
+      "relation": "communicates via",
+      "confidence": "EXTRACTED",
+      "_src": "mark_attendance_page",
+      "_tgt": "api_client",
+      "source": "mark_attendance_page",
+      "target": "api_client"
+    },
+    {
+      "relation": "handles",
+      "confidence": "EXTRACTED",
+      "_src": "mark_attendance_page",
+      "_tgt": "attendance_marking",
+      "source": "mark_attendance_page",
+      "target": "attendance_marking"
+    },
+    {
+      "relation": "utilizes",
+      "confidence": "EXTRACTED",
+      "_src": "mark_attendance_page",
+      "_tgt": "face_recognition",
+      "source": "mark_attendance_page",
+      "target": "face_recognition"
+    },
+    {
+      "relation": "communicates via",
+      "confidence": "EXTRACTED",
+      "_src": "reports_page",
+      "_tgt": "api_client",
+      "source": "reports_page",
+      "target": "api_client"
+    },
+    {
+      "relation": "displays",
+      "confidence": "EXTRACTED",
+      "_src": "reports_page",
+      "_tgt": "attendance_report",
+      "source": "reports_page",
+      "target": "attendance_report"
+    },
+    {
+      "relation": "communicates via",
+      "confidence": "EXTRACTED",
+      "_src": "analytics_page",
+      "_tgt": "api_client",
+      "source": "analytics_page",
+      "target": "api_client"
+    },
+    {
+      "relation": "visualizes",
+      "confidence": "EXTRACTED",
+      "_src": "analytics_page",
+      "_tgt": "attendance_report",
+      "source": "analytics_page",
+      "target": "attendance_report"
+    },
+    {
+      "relation": "uses state from",
+      "confidence": "EXTRACTED",
+      "_src": "theme_toggle",
+      "_tgt": "theme_store",
+      "source": "theme_toggle",
+      "target": "theme_store"
+    },
+    {
+      "relation": "provides",
+      "confidence": "EXTRACTED",
+      "_src": "theme_store",
+      "_tgt": "dark_mode_theme",
+      "source": "theme_store",
+      "target": "dark_mode_theme"
+    },
+    {
+      "relation": "provides",
+      "confidence": "EXTRACTED",
+      "_src": "theme_store",
+      "_tgt": "light_mode_theme",
+      "source": "theme_store",
+      "target": "light_mode_theme"
+    },
+    {
+      "relation": "depends on",
+      "confidence": "EXTRACTED",
+      "_src": "attendance_marking",
+      "_tgt": "face_recognition",
+      "source": "attendance_marking",
+      "target": "face_recognition"
+    },
+    {
+      "relation": "uses embeddings from",
+      "confidence": "EXTRACTED",
+      "_src": "face_recognition",
+      "_tgt": "embedding_generation",
+      "source": "face_recognition",
+      "target": "embedding_generation"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "_src": "tailwind_config",
+      "_tgt": "dark_mode_theme",
+      "source": "dark_mode_theme",
+      "target": "tailwind_config"
+    }
+  ]
+}

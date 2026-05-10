@@ -110,6 +110,14 @@ npm run preview
 - Student images and debug outputs are served under `/static`.
 - `test_api.py` and `test_classroom.jpg` are available in repo root for quick API smoke tests.
 
+## Knowledge Graph Artifacts (Graphify)
+
+Graphify outputs are available under `graphify-out/`:
+
+- `graphify-out/graph.json` - GraphRAG-ready structured graph data
+- `graphify-out/graph.html` - Interactive graph visualization
+- `graphify-out/GRAPH_REPORT.md` - Plain-language architecture and dependency report
+
 ## License
 
 This project is intended for educational and personal use.
