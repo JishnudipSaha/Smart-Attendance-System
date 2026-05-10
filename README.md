@@ -1,124 +1,109 @@
-# 🎓 Smart Attendance System
+# Smart Attendance System
 
-An AI-powered automated attendance solution that detects and recognizes students from classroom images and automatically marks their attendance.
+AI-powered attendance platform for classrooms. The system detects faces from classroom photos, recognizes registered students, and stores attendance records with reports and analytics.
 
-## 🌟 Key Features
-- **Multi-Face Recognition**: Detects and recognizes multiple students in a single classroom image.
-- **High Accuracy AI**: Uses RetinaFace for robust face detection and ArcFace (InsightFace) for high-precision embeddings.
-- **Production-Grade Backend**: Built with FastAPI, SQLAlchemy (Async), and PostgreSQL.
-- **Automatic Attendance Engine**: Converts AI recognition results into persistent attendance records with duplicate prevention.
-- **Modern Admin Dashboard**: Fully responsive React frontend with Light/Dark mode, student management, and real-time attendance marking.
-- **Attendance Analytics**: Visual trends and presence distribution charts.
-- **Automatic Cleanup**: Comprehensive student deletion pipeline that removes metadata, embeddings, and images.
-- **Debug Visualization**: Generates annotated images with bounding boxes and confidence scores for AI verification.
-- **Dockerized Deployment**: Easy setup with Docker Compose for consistent environments.
+## Features
 
-## 🛠️ Tech Stack
-- **Backend**: FastAPI, Python 3.11
-- **Frontend**: React 18, Vite, Tailwind CSS, Zustand, TanStack Query
-- **Database**: PostgreSQL, SQLAlchemy 2.0, Alembic
-- **AI/ML**: InsightFace (RetinaFace & ArcFace), OpenCV, NumPy, ONNX Runtime
-- **Infrastructure**: Docker, Docker Compose
-- **Validation**: Pydantic
+- Multi-face classroom recognition with InsightFace (RetinaFace + ArcFace)
+- Student lifecycle management (create, upload photos, generate embeddings, delete with cleanup)
+- Attendance marking, daily reports, and CSV export
+- Modern React dashboard with dark mode and analytics views
+- Debug image support for recognition result verification
 
-## 🚀 Getting Started
+## Tech Stack
 
-### Prerequisites
-- Docker Desktop installed
-- Git cloned to local machine
-- Node.js and npm installed (for frontend)
+| Layer | Technology |
+| --- | --- |
+| Backend | FastAPI, SQLAlchemy (async), Alembic, PostgreSQL |
+| Frontend | React 19, TypeScript, Vite, Tailwind CSS, Zustand, TanStack Query |
+| AI/ML | InsightFace, OpenCV, NumPy, ONNX Runtime |
+| Infra | Docker, Docker Compose |
 
-### Installation & Setup
-1. **Clone the repository**:
+## Project Structure
+
+```text
+app/
+├── api/         # FastAPI routes
+├── services/    # Business logic and orchestration
+├── ai/          # Detection/recognition pipeline wrappers
+├── models/      # SQLAlchemy models
+├── schemas/     # Pydantic schemas
+├── core/        # Config and app settings
+└── main.py      # FastAPI entrypoint
+
+frontend/
+└── src/
+   ├── api/
+   ├── components/
+   ├── pages/
+   └── store/
+```
+
+## Prerequisites
+
+- Docker Desktop
+- Node.js 20+ and npm
+- Git
+
+## Quick Start (Recommended: Docker + local frontend)
+
+1. Clone repository:
    ```bash
    git clone https://github.com/JishnudipSaha/Smart-Attendance-System.git
    cd Smart-Attendance-System
    ```
-
-2. **Environment Configuration**:
-   Create a `.env` file in the root directory:
+2. Create `.env` (you can copy from `.env.example`):
    ```env
    APP_NAME="Smart Attendance System"
    DATABASE_URL=postgresql+asyncpg://postgres:password@db:5432/attendance_db
-   SECRET_KEY=your-secret-key
+   SECRET_KEY=change-this-secret
    ```
-
-3. **Launch Backend with Docker**:
+3. Start backend and database:
    ```bash
    docker-compose up -d --build
-   ```
-
-4. **Initialize Database**:
-   ```bash
    docker-compose exec backend alembic upgrade head
    ```
-
-5. **Launch Frontend**:
+4. Start frontend:
    ```bash
    cd frontend
    npm install
    npm run dev
    ```
-   > If you are in the project root, run: `npm --prefix ./frontend run dev`
 
-### 🖥️ Accessing the System
-- **Admin Dashboard**: `http://localhost:5173`
-- **API Documentation**: `http://localhost:8000/docs`
+## Local URLs
 
-### 🧪 Testing the System
-You can use the Dashboard or the following API endpoints:
+- Frontend: `http://localhost:5173`
+- Backend API docs: `http://localhost:8000/docs`
+- Health: `http://localhost:8000/health`
 
-| Action | Method | Endpoint | Description |
-| :--- | :--- | :--- | :--- |
-| **Health Check** | `GET` | `/health` | Verify API and DB connectivity |
-| **Register Student** | `POST` | `/students/` | Create student metadata |
-| **Upload Photos** | `POST` | `/students/{id}/upload-images` | Upload reference images |
-| **Generate AI** | `POST` | `/ai/students/{id}/generate-embeddings` | Create facial embeddings |
-| **Recognize Class** | `POST` | `/recognition/classroom` | Detect & recognize multiple students |
-| **Mark Attendance** | `POST` | `/attendance/mark` | Recognize and mark attendance |
-| **Get Report** | `GET` | `/attendance/report` | Get daily attendance status |
-| **Export CSV** | `GET` | `/attendance/export/csv` | Download attendance as CSV |
+## Core API Endpoints
 
-**Visualizing Results:**
-- **Student Images**: `http://localhost:8000/static/students/{roll_number}/{filename}`
-- **AI Debug Images**: `http://localhost:8000/static/debug/{debug_filename}`
+| Purpose | Method | Endpoint |
+| --- | --- | --- |
+| Register student | `POST` | `/students/` |
+| Upload student photos | `POST` | `/students/{id}/upload-images` |
+| Generate embeddings | `POST` | `/ai/students/{id}/generate-embeddings` |
+| Recognize classroom | `POST` | `/recognition/classroom` |
+| Mark attendance | `POST` | `/attendance/mark` |
+| Attendance report | `GET` | `/attendance/report` |
+| Export report CSV | `GET` | `/attendance/export/csv` |
 
-## ✅ Recent Updates
-- Fixed frontend lint/type issues across Students, Mark Attendance, Reports, and Analytics pages.
-- Fixed Tailwind CSS v4 setup so UI styling renders correctly in the web app.
-- Added real student image upload flow in the Students page (replacing placeholder popup).
-- Fixed `/attendance/mark` to use the same recognition path as `/recognition/classroom`.
-- Improved attendance recognition error handling for invalid or unreadable image uploads.
-- Added frontend student deletion with confirmation and backend cascade cleanup support.
-- Added per-student status tracking in UI: uploaded photo count, embedding count, and generated/pending badges.
-- Added student ID visibility in student cards and delete confirmation for safer operations.
-- Added class-name dropdown in Attendance Reports populated from registered classes.
-- Fixed dropdown option contrast/readability in dark mode.
-- Added backend smoke-test assets in repo root: `test_api.py` and `test_classroom.jpg`.
+## Frontend Commands
 
-## 📁 Project Architecture
-```text
-app/
-├── api/          # Route handlers (Thin layer)
-├── services/     # Business logic & AI orchestration
-├── ai/           # Low-level AI wrappers (Detector, Recognizer, Pipeline)
-├── models/       # SQLAlchemy database models
-├── schemas/      # Pydantic validation models
-├── core/         # Global configuration and security
-└── main.py       # Application entry point
+Run from `frontend/`:
 
-frontend/
-├── src/
-│   ├── api/      # API service layer
-│   ├── components/ # Reusable UI components
-│   ├── pages/      # Page-level views
-│   └── store/      # Global state (Theme, etc.)
+```bash
+npm run dev
+npm run lint
+npm run build
+npm run preview
 ```
 
-## 📈 Roadmap
-- [x] Phase 1: Backend Foundation
-- [x] Phase 2: Student Registration & Image Uploads
-- [x] Phase 3: AI Embedding Generation
-- [x] Phase 4: Multi-Face Classroom Recognition
-- [x] Phase 5: Attendance Marking Engine
-- [x] Phase 6: Admin Dashboard & Analytics Reports
+## Notes
+
+- Student images and debug outputs are served under `/static`.
+- `test_api.py` and `test_classroom.jpg` are available in repo root for quick API smoke tests.
+
+## License
+
+This project is intended for educational and personal use.

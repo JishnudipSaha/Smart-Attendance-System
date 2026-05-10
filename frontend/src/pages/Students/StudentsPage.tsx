@@ -235,7 +235,7 @@ const StudentsPage: React.FC = () => {
       )}
 
       {studentToDelete && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/20 backdrop-blur-sm dark:bg-slate-950/35">
           <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl w-full max-w-md shadow-2xl space-y-4">
             <h2 className="text-xl font-bold">Delete Student</h2>
             <p className="text-sm text-slate-500 dark:text-slate-400">
@@ -265,7 +265,7 @@ const StudentsPage: React.FC = () => {
       )}
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/20 backdrop-blur-sm dark:bg-slate-950/35">
           <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl w-full max-w-md shadow-2xl">
             <h2 className="text-xl font-bold mb-6">Register New Student</h2>
             <form onSubmit={handleCreate} className="space-y-4">
