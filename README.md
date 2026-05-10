@@ -94,6 +94,7 @@ You can use the Dashboard or the following API endpoints:
 - Added student ID visibility in student cards and delete confirmation for safer operations.
 - Added class-name dropdown in Attendance Reports populated from registered classes.
 - Fixed dropdown option contrast/readability in dark mode.
+- Added backend smoke-test assets in repo root: `test_api.py` and `test_classroom.jpg`.
 
 ## 📁 Project Architecture
 ```text
