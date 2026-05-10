@@ -110,7 +110,7 @@ const StudentsPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="page-shell">
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold">Student Directory</h1>
@@ -118,7 +118,7 @@ const StudentsPage: React.FC = () => {
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+          className="ui-button-primary"
         >
           <Plus size={20} /> Add Student
         </button>
@@ -143,7 +143,7 @@ const StudentsPage: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {students.map((student) => (
-            <div key={student.id} className="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm space-y-4">
+            <div key={student.id} className="ui-card-soft space-y-4">
               <div className="flex justify-between items-start">
                 <div>
                   <div className="flex items-center gap-2 flex-wrap">
@@ -198,7 +198,7 @@ const StudentsPage: React.FC = () => {
                   <button
                     onClick={() => fileInputRefs.current[student.id]?.click()}
                     disabled={uploadingStudentId === student.id}
-                    className="p-2 text-slate-500 hover:text-primary-600 transition-colors"
+                    className="ui-icon-btn"
                     title="Upload Images"
                   >
                     {uploadingStudentId === student.id ? (
@@ -210,7 +210,7 @@ const StudentsPage: React.FC = () => {
                   <button
                     onClick={() => handleGenerateEmbeddings(student.id)}
                     disabled={!student.has_uploaded_images}
-                    className="p-2 text-slate-500 hover:text-yellow-500 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="ui-icon-btn disabled:opacity-40 disabled:cursor-not-allowed hover:text-yellow-500"
                     title="Generate AI Embeddings"
                   >
                     <Zap size={18} />
@@ -218,7 +218,7 @@ const StudentsPage: React.FC = () => {
                   <button
                     onClick={() => setStudentToDelete(student)}
                     disabled={deletingStudentId === student.id}
-                    className="p-2 text-slate-500 hover:text-red-600 transition-colors"
+                    className="ui-icon-btn hover:text-red-600"
                     title="Delete Student"
                   >
                     {deletingStudentId === student.id ? (
@@ -236,7 +236,7 @@ const StudentsPage: React.FC = () => {
 
       {studentToDelete && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/20 backdrop-blur-sm dark:bg-slate-950/35">
-          <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl w-full max-w-md shadow-2xl space-y-4">
+          <div className="ui-card w-full max-w-md space-y-4">
             <h2 className="text-xl font-bold">Delete Student</h2>
             <p className="text-sm text-slate-500 dark:text-slate-400">
               This will permanently delete <span className="font-semibold">{studentToDelete.name}</span> (ID: {studentToDelete.id}),
@@ -251,12 +251,12 @@ const StudentsPage: React.FC = () => {
               >
                 Cancel
               </button>
-              <button
-                type="button"
-                onClick={handleConfirmDelete}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
-                disabled={deletingStudentId === studentToDelete.id}
-              >
+                <button
+                  type="button"
+                  onClick={handleConfirmDelete}
+                  className="inline-flex items-center justify-center rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700 disabled:opacity-50"
+                  disabled={deletingStudentId === studentToDelete.id}
+                >
                 {deletingStudentId === studentToDelete.id ? 'Deleting...' : 'Delete Student'}
               </button>
             </div>
@@ -266,13 +266,13 @@ const StudentsPage: React.FC = () => {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/20 backdrop-blur-sm dark:bg-slate-950/35">
-          <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl w-full max-w-md shadow-2xl">
+          <div className="ui-card w-full max-w-md">
             <h2 className="text-xl font-bold mb-6">Register New Student</h2>
             <form onSubmit={handleCreate} className="space-y-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium">Full Name</label>
                 <input
-                  className="w-full p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent outline-none focus:ring-2 ring-primary-500"
+                  className="ui-input"
                   value={newStudent.name}
                   onChange={(e) => setNewStudent({ ...newStudent, name: e.target.value })}
                   required
@@ -281,7 +281,7 @@ const StudentsPage: React.FC = () => {
               <div className="space-y-2">
                 <label className="text-sm font-medium">Roll Number</label>
                 <input
-                  className="w-full p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent outline-none focus:ring-2 ring-primary-500"
+                  className="ui-input"
                   value={newStudent.roll_number}
                   onChange={(e) => setNewStudent({ ...newStudent, roll_number: e.target.value })}
                   required
@@ -291,7 +291,7 @@ const StudentsPage: React.FC = () => {
                 <div className="flex-1 space-y-2">
                   <label className="text-sm font-medium">Class Name</label>
                   <input
-                    className="w-full p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent outline-none focus:ring-2 ring-primary-500"
+                    className="ui-input"
                     value={newStudent.class_name}
                     onChange={(e) => setNewStudent({ ...newStudent, class_name: e.target.value })}
                     required
@@ -300,7 +300,7 @@ const StudentsPage: React.FC = () => {
                 <div className="flex-1 space-y-2">
                   <label className="text-sm font-medium">Section</label>
                   <input
-                    className="w-full p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent outline-none focus:ring-2 ring-primary-500"
+                    className="ui-input"
                     value={newStudent.section}
                     onChange={(e) => setNewStudent({ ...newStudent, section: e.target.value })}
                     required
@@ -317,7 +317,7 @@ const StudentsPage: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
+                  className="ui-button-primary"
                 >
                   Register
                 </button>

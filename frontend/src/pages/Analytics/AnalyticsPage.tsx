@@ -50,7 +50,7 @@ const AnalyticsPage: React.FC = () => {
   }, [fetchAnalytics]);
 
   return (
-    <div className="space-y-8">
+    <div className="page-shell">
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-bold">Attendance Analytics</h1>
         <p className="text-slate-500 dark:text-slate-400">Visualize attendance patterns and student trends.</p>
@@ -58,7 +58,7 @@ const AnalyticsPage: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Attendance Trend Chart */}
-        <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+        <div className="ui-card space-y-6">
           <h3 className="text-lg font-bold">Weekly Attendance Trend</h3>
           <div className="h-64 w-full">
             {loading ? (
@@ -80,7 +80,7 @@ const AnalyticsPage: React.FC = () => {
         </div>
 
         {/* Distribution Chart */}
-        <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+        <div className="ui-card space-y-6">
           <h3 className="text-lg font-bold">Presence Distribution</h3>
           <div className="h-64 w-full flex items-center justify-center">
             {loading ? (

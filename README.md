@@ -10,6 +10,12 @@ AI-powered attendance platform for classrooms. The system detects faces from cla
 - Modern React dashboard with dark mode and analytics views
 - Debug image support for recognition result verification
 
+## Recent Improvements
+
+- Refined dashboard layout and spacing across core pages (Students, Reports, Analytics, Mark Attendance)
+- Updated dark/light theme behavior for better readability and visual consistency
+- Improved global frontend styling in `frontend/src/index.css` for cleaner UI presentation
+
 ## Tech Stack
 
 | Layer | Technology |

@@ -15,6 +15,8 @@ interface AttendanceReportResponse {
   report: ReportEntry[];
 }
 
+const isValidISODate = (value: string): boolean => /^\d{4}-\d{2}-\d{2}$/.test(value);
+
 const ReportsPage: React.FC = () => {
   const [className, setClassName] = useState('');
   const [availableClasses, setAvailableClasses] = useState<string[]>([]);
@@ -52,7 +54,7 @@ const ReportsPage: React.FC = () => {
   }, []);
 
   const fetchReport = useCallback(async () => {
-    if (!className) {
+    if (!className || !isValidISODate(reportDate)) {
       setReport([]);
       return;
     }
@@ -85,8 +87,16 @@ const ReportsPage: React.FC = () => {
     window.location.href = `http://localhost:8000/attendance/export/csv?class_name=${className}&report_date=${reportDate}`;
   };
 
+  const handleReportDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const nextDate = e.target.value;
+    if (isValidISODate(nextDate)) {
+      setReportDate(nextDate);
+      if (error) setError(null);
+    }
+  };
+
   return (
-    <div className="space-y-8">
+    <div className="page-shell">
       <div className="flex justify-between items-center">
         <div className="flex flex-col gap-1">
           <h1 className="text-2xl font-bold">Attendance Reports</h1>
@@ -95,19 +105,19 @@ const ReportsPage: React.FC = () => {
         <button
           onClick={handleExport}
           disabled={!className}
-          className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed"
+          className="ui-button-secondary disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <Download size={18} /> Export CSV
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ui-card">
         <div className="space-y-2">
           <label className="text-sm font-medium flex items-center gap-2">
             <User size={16} /> Class Name
           </label>
           <select
-            className="w-full p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent text-slate-900 dark:text-slate-100 outline-none focus:ring-2 ring-primary-500 [&_option]:text-slate-900 [&_option]:bg-white"
+            className="ui-input [&_option]:text-slate-900 [&_option]:bg-white"
             value={className}
             onChange={(e) => setClassName(e.target.value)}
             disabled={loadingClasses || availableClasses.length === 0}
@@ -129,16 +139,16 @@ const ReportsPage: React.FC = () => {
           </label>
           <input
             type="date"
-            className="w-full p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent outline-none focus:ring-2 ring-primary-500"
-            value={reportDate}
-            onChange={(e) => setReportDate(e.target.value)}
+            className="ui-input"
+            defaultValue={reportDate}
+            onChange={handleReportDateChange}
           />
         </div>
         <div className="flex items-end">
           <button
             onClick={fetchReport}
             disabled={!className || loadingClasses}
-            className="w-full py-2 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="ui-button-primary w-full disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Refresh Report
           </button>
@@ -162,7 +172,7 @@ const ReportsPage: React.FC = () => {
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
         </div>
       ) : (
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+        <div className="ui-card p-0 overflow-hidden">
           <table className="w-full text-left border-collapse">
             <thead className="bg-slate-50 dark:bg-slate-700/50 border-b border-slate-200 dark:border-slate-700">
               <tr>

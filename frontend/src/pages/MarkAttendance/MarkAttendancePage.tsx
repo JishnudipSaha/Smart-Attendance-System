@@ -71,7 +71,7 @@ const MarkAttendancePage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8">
+    <div className="max-w-6xl mx-auto page-shell">
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold">AI Attendance Marking</h1>
         <p className="text-slate-500 dark:text-slate-400">Upload a classroom image to automatically mark students present.</p>
@@ -80,23 +80,23 @@ const MarkAttendancePage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Upload Section */}
         <div className="lg:col-span-1 space-y-6">
-          <form onSubmit={handleMarkAttendance} className="p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+          <form onSubmit={handleMarkAttendance} className="ui-card space-y-6">
             <div className="space-y-2">
               <label className="text-sm font-medium">Class Name</label>
-              <input
-                type="text"
-                placeholder="e.g. CS101"
-                className="w-full p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-transparent outline-none focus:ring-2 ring-primary-500"
-                value={className}
-                onChange={(e) => setClassName(e.target.value)}
-                required
+                <input
+                  type="text"
+                  placeholder="e.g. CS101"
+                  className="ui-input"
+                  value={className}
+                  onChange={(e) => setClassName(e.target.value)}
+                  required
               />
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-medium">Classroom Image</label>
               <div
-                className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-colors cursor-pointer
+                className={`relative border-2 border-dashed rounded-2xl p-8 text-center transition-colors cursor-pointer
                   ${file ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20' : 'border-slate-300 dark:border-slate-600 hover:border-primary-400'}`}
                 onClick={() => document.getElementById('fileInput')?.click()}
               >
@@ -118,7 +118,7 @@ const MarkAttendancePage: React.FC = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              className="ui-button-primary w-full py-3"
             >
               {loading ? <Loader2 className="animate-spin" size={20} /> : <Camera size={20} />}
               {loading ? 'Processing...' : 'Mark Attendance'}
@@ -136,14 +136,14 @@ const MarkAttendancePage: React.FC = () => {
         {/* Results Section */}
         <div className="lg:col-span-2 space-y-6">
           {!results && !loading && (
-            <div className="h-full flex flex-col items-center justify-center p-12 bg-slate-100 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 text-slate-400 border-dashed">
+            <div className="h-full flex flex-col items-center justify-center p-12 ui-card-soft text-slate-400 border-dashed">
               <Camera size={48} className="mb-4 opacity-20" />
               <p>Upload an image to see recognition results</p>
             </div>
           )}
 
           {loading && (
-            <div className="h-full flex flex-col items-center justify-center p-12 bg-slate-100 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 text-slate-400 border-dashed">
+            <div className="h-full flex flex-col items-center justify-center p-12 ui-card-soft text-slate-400 border-dashed">
               <Loader2 className="animate-spin mb-4 text-primary-600" size={48} />
               <p>AI is analyzing the image and marking attendance...</p>
             </div>
@@ -151,7 +151,7 @@ const MarkAttendancePage: React.FC = () => {
 
           {results && (
             <div className="space-y-6">
-              <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+              <div className="ui-card">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-lg font-bold">Recognition Results</h3>
                   <div className="flex items-center gap-2 px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-xs font-bold">

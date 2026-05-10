@@ -15,24 +15,32 @@ const App: React.FC = () => {
       case 'reports': return <ReportsPage />;
       case 'analytics': return <AnalyticsPage />;
       default: return (
-        <div className="flex flex-col items-center justify-center h-full text-center">
-          <h1 className="text-4xl font-bold mb-4">Welcome to SmartAttend</h1>
-          <p className="text-slate-500 dark:text-slate-400 max-w-md">
-            Automate your classroom attendance using cutting-edge AI face recognition.
-            Manage students, mark attendance, and track patterns in one place.
-          </p>
-          <div className="mt-8 grid grid-cols-3 gap-6">
-            <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+        <div className="page-shell">
+          <div className="ui-card relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary-500/10 via-indigo-500/5 to-cyan-500/10" />
+            <div className="relative space-y-3">
+              <p className="inline-flex items-center rounded-full bg-primary-100 px-3 py-1 text-xs font-semibold text-primary-700 dark:bg-primary-900/40 dark:text-primary-300">
+                Smart Attendance Platform
+              </p>
+              <h1 className="text-4xl font-bold tracking-tight">Welcome to SmartAttend</h1>
+              <p className="max-w-2xl text-slate-600 dark:text-slate-300">
+                Automate classroom attendance with AI face recognition. Manage students, generate embeddings,
+                mark attendance, and monitor trends from one polished workspace.
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="ui-card-soft">
               <div className="text-3xl font-bold text-primary-600">100%</div>
-              <div className="text-sm text-slate-500">AI Accuracy</div>
+              <div className="text-sm text-slate-500">AI Accuracy Focus</div>
             </div>
-            <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div className="ui-card-soft">
               <div className="text-3xl font-bold text-primary-600">1s</div>
-              <div className="text-sm text-slate-500">Processing Time</div>
+              <div className="text-sm text-slate-500">Fast Recognition Cycle</div>
             </div>
-            <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
-              <div className="text-3xl font-bold text-primary-600">Real-time</div>
-              <div className="text-sm text-slate-500">Tracking</div>
+            <div className="ui-card-soft">
+              <div className="text-3xl font-bold text-primary-600">Live</div>
+              <div className="text-sm text-slate-500">Attendance Insights</div>
             </div>
           </div>
         </div>
