@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Calendar, Download, User } from 'lucide-react';
+import { Calendar, Download, User, Users, XCircle, FileText } from 'lucide-react';
 import apiClient, { studentService } from '../../api/client';
 
 interface ReportEntry {
@@ -95,9 +95,15 @@ const ReportsPage: React.FC = () => {
     }
   };
 
+  // Computed stats
+  const presentCount = report.filter((r) => r.status === 'Present').length;
+  const absentCount = report.filter((r) => r.status !== 'Present').length;
+  const attendanceRate = report.length > 0 ? Math.round((presentCount / report.length) * 100) : 0;
+
   return (
     <div className="page-shell">
-      <div className="flex justify-between items-center">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex flex-col gap-1">
           <h1 className="text-2xl font-bold">Attendance Reports</h1>
           <p className="text-slate-500 dark:text-slate-400">View and export attendance records for your classes.</p>
@@ -111,6 +117,7 @@ const ReportsPage: React.FC = () => {
         </button>
       </div>
 
+      {/* Filters */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ui-card">
         <div className="space-y-2">
           <label className="text-sm font-medium flex items-center gap-2">
@@ -155,23 +162,77 @@ const ReportsPage: React.FC = () => {
         </div>
       </div>
 
+      {/* Warnings */}
       {!loadingClasses && availableClasses.length === 0 && (
-        <div className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg text-amber-700 dark:text-amber-300 text-sm">
-          No registered classes found. Add students first to load class options.
+        <div className="toast-error">
+          <Users size={18} />
+          <span>No registered classes found. Add students first to load class options.</span>
         </div>
       )}
 
       {error && (
-        <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400 text-sm">
-          {error}
+        <div className="toast-error">
+          <XCircle size={18} />
+          <span>{error}</span>
         </div>
       )}
 
-      {loading ? (
-        <div className="flex justify-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+      {/* Summary Stats */}
+      {!loading && report.length > 0 && (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="stat-card">
+            <div className="stat-card-accent bg-gradient-to-b from-primary-500 to-indigo-500" />
+            <div className="pl-3">
+              <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">{report.length}</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400">Total Students</div>
+            </div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-card-accent bg-gradient-to-b from-emerald-500 to-teal-500" />
+            <div className="pl-3">
+              <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{presentCount}</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400">Present</div>
+            </div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-card-accent bg-gradient-to-b from-red-500 to-rose-500" />
+            <div className="pl-3">
+              <div className="text-2xl font-bold text-red-600 dark:text-red-400">{absentCount}</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400">Absent</div>
+            </div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-card-accent bg-gradient-to-b from-amber-500 to-orange-500" />
+            <div className="pl-3">
+              <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">{attendanceRate}%</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400">Attendance Rate</div>
+            </div>
+          </div>
         </div>
-      ) : (
+      )}
+
+      {/* Loading Skeleton */}
+      {loading && (
+        <div className="space-y-3">
+          <div className="grid grid-cols-4 gap-4">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="ui-card-soft">
+                <div className="skeleton h-8 w-16 rounded mb-2" />
+                <div className="skeleton h-3 w-24 rounded" />
+              </div>
+            ))}
+          </div>
+          <div className="ui-card p-0 overflow-hidden">
+            <div className="skeleton h-14 w-full" />
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="skeleton h-14 w-full mt-px" style={{ opacity: 1 - i * 0.15 }} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Table */}
+      {!loading && (
         <div className="ui-card p-0 overflow-hidden">
           <table className="w-full text-left border-collapse">
             <thead className="bg-slate-50 dark:bg-slate-700/50 border-b border-slate-200 dark:border-slate-700">
@@ -185,31 +246,52 @@ const ReportsPage: React.FC = () => {
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
               {report.length > 0 ? (
-                report.map((entry) => (
-                  <tr key={entry.student_id} className="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
-                    <td className="px-6 py-4 font-medium">{entry.name}</td>
+                report.map((entry, idx) => (
+                  <tr
+                    key={entry.student_id}
+                    className={`transition-colors ${
+                      idx % 2 === 0
+                        ? 'bg-white/50 dark:bg-slate-900/20'
+                        : 'bg-slate-50/50 dark:bg-slate-800/10'
+                    } hover:bg-primary-50/50 dark:hover:bg-primary-900/10`}
+                  >
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-indigo-500 flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+                          {entry.name.split(' ').map((w) => w[0]).join('').toUpperCase().slice(0, 2)}
+                        </div>
+                        <span className="font-medium">{entry.name}</span>
+                      </div>
+                    </td>
                     <td className="px-6 py-4 text-slate-500 dark:text-slate-400">{entry.roll_number}</td>
                     <td className="px-6 py-4">
-                      <span
-                        className={`px-2 py-1 rounded-full text-xs font-bold ${
+                      <span className="inline-flex items-center gap-1.5">
+                        <span className={`w-2 h-2 rounded-full ${
+                          entry.status === 'Present' ? 'bg-emerald-500' : 'bg-red-500'
+                        }`} />
+                        <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
                           entry.status === 'Present'
-                            ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
+                            ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400'
                             : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
-                        }`}
-                      >
-                        {entry.status}
+                        }`}>
+                          {entry.status}
+                        </span>
                       </span>
                     </td>
                     <td className="px-6 py-4 text-slate-500 dark:text-slate-400">
-                      {entry.confidence ? `${(entry.confidence * 100).toFixed(1)}%` : '—'}
+                      {entry.confidence ? `${(entry.confidence * 100).toFixed(1)}%` : '---'}
                     </td>
-                    <td className="px-6 py-4 text-slate-500 dark:text-slate-400">{entry.time || '—'}</td>
+                    <td className="px-6 py-4 text-slate-500 dark:text-slate-400 text-sm">{entry.time || '---'}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5} className="px-6 py-12 text-center text-slate-400 italic">
-                    No attendance records found for this class and date.
+                  <td colSpan={5} className="px-6 py-16">
+                    <div className="flex flex-col items-center justify-center text-slate-400">
+                      <FileText size={40} className="mb-3 opacity-30" />
+                      <p className="font-medium text-slate-500 dark:text-slate-400">No records found</p>
+                      <p className="text-sm mt-1">No attendance records for {className} on {reportDate}</p>
+                    </div>
                   </td>
                 </tr>
               )}

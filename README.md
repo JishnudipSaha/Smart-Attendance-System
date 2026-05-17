@@ -7,21 +7,36 @@ AI-powered attendance platform for classrooms. The system detects faces from cla
 - Multi-face classroom recognition with InsightFace (RetinaFace + ArcFace)
 - Student lifecycle management (create, upload photos, generate embeddings, delete with cleanup)
 - Attendance marking, daily reports, and CSV export
-- Modern React dashboard with dark mode and analytics views
+- Modern glassmorphism React dashboard with dark mode and analytics views
 - Debug image support for recognition result verification
 
-## Recent Improvements
+## Frontend UI
 
-- Refined dashboard layout and spacing across core pages (Students, Reports, Analytics, Mark Attendance)
-- Updated dark/light theme behavior for better readability and visual consistency
-- Improved global frontend styling in `frontend/src/index.css` for cleaner UI presentation
+The frontend uses a polished glassmorphism design with:
+
+- **Dashboard** — Live stats (total students, active classes, AI readiness), quick-action cards, getting-started checklist
+- **Students** — Search/filter, avatar initials, progress indicators for photo/embedding readiness, auto-dismissing toasts, skeleton loading
+- **Mark Attendance** — Enhanced upload zone with animations, confidence bar visualizations, step-by-step processing indicators, summary stats
+- **Reports** — Summary stat cards (total, present, absent, attendance rate), status dot indicators, skeleton loading, alternating row tints
+- **Analytics** — Real data from API, gradient bar charts, donut chart with legend, summary stats (avg attendance, best day, active days)
+- **Sidebar** — Active indicator bar, user profile section, page description subtitles, notification bell
+
+### Screenshots
+
+| Dashboard | Students | Mark Attendance |
+|-----------|----------|-----------------|
+| Live stats, quick actions, checklist | Search, avatars, progress bars | Upload zone, confidence bars |
+
+| Reports | Analytics |
+|---------|-----------|
+| Summary cards, status dots, export | Gradient charts, legend, real data |
 
 ## Tech Stack
 
 | Layer | Technology |
 | --- | --- |
 | Backend | FastAPI, SQLAlchemy (async), Alembic, PostgreSQL |
-| Frontend | React 19, TypeScript, Vite, Tailwind CSS, Zustand, TanStack Query |
+| Frontend | React 19, TypeScript 6, Vite 8, Tailwind CSS v4, Zustand 5, Recharts |
 | AI/ML | InsightFace, OpenCV, NumPy, ONNX Runtime |
 | Infra | Docker, Docker Compose |
 
@@ -39,10 +54,11 @@ app/
 
 frontend/
 └── src/
-   ├── api/
-   ├── components/
-   ├── pages/
-   └── store/
+   ├── api/            # Axios client + service layer
+   ├── components/     # Layout (DashboardLayout) and common (ThemeToggle)
+   ├── pages/          # Students, MarkAttendance, Reports, Analytics
+   ├── store/          # Zustand theme store
+   └── index.css       # Tailwind config + glassmorphism component classes
 ```
 
 ## Prerequisites
@@ -99,16 +115,18 @@ frontend/
 Run from `frontend/`:
 
 ```bash
-npm run dev
-npm run lint
-npm run build
-npm run preview
+npm run dev        # Start dev server
+npm run build      # Production build (tsc + vite)
+npm run lint       # Run ESLint
+npm run preview    # Preview production build
 ```
 
 ## Notes
 
 - Student images and debug outputs are served under `/static`.
 - `test_api.py` and `test_classroom.jpg` are available in repo root for quick API smoke tests.
+- The glassmorphism design system uses custom CSS component classes (`.ui-card`, `.glass-panel`, `.ui-button-primary`, etc.) defined in `index.css`.
+- Tailwind CSS v4 note: custom component classes cannot be `@apply`'d within `@layer components` — styles must be inlined.
 
 ## Knowledge Graph Artifacts (Graphify)
 
